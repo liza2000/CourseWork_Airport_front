@@ -1,0 +1,57 @@
+span, label, .pas-data{
+  display: inline-block;
+  margin:0;
+  padding: 5px 3px;
+  float: right;
+  width: 100%;
+  text-align: right;
+}
+button{
+  width: 150px;
+}
+
+.passengers, .passenger, .container{
+  text-align: center;
+  display: inline-block;
+  padding: 5px 5px;
+}
+select{
+  height:21px;
+}.passenger{
+   width: 240px;
+ }
+.forlabel{
+label, button{
+  float: unset;
+}
+
+}
+.container{
+  text-align: center;
+  display: inline-block;
+  height: max-content;
+  background-color: darkcyan;
+  border: thick solid #e743ce;
+  margin: 5% auto;
+  width: 70%;
+}
+@media(min-width: 1099px) {
+  .container {
+    min-width: 600px;
+  }
+}
+@media(min-width: 877px) and (max-width: 1098px) {
+  .container{
+    max-width: 800px;
+    min-width: 310px;
+  }
+}
+@media(max-width: 876px) {
+  .container{
+    min-width: 310px;
+    max-width: 500px;
+  }
+}
+
+
+

@@ -1,0 +1,97 @@
+<button (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
+
+<div *ngIf="addFormOpened" class="container addForm">
+  <label>Самолёт<br/>
+    <input type="text" #newAircraft/>
+  </label><br/>
+  <label>Время вылета<br/>
+    <input type="date" #newFlightDepDate/>
+    <input type="time" #newFlightDepTime>
+  </label><br/>
+  <label>Время прилета<br/>
+    <input type="date" #newFlightArrDate/>
+    <input type="time" #newFlightArrTime>
+  </label><br/>
+  <label>Аэропорт вылета<br/>
+    <input type="text" #newFlightDep/>
+  </label><br/>
+  <label>Аэропорт <br/>
+    <input type="text" #newFlightArr/>
+  </label><br/>
+  <label> <button>Добавить</button></label>
+</div>
+
+<table *ngIf="!addFormOpened">
+  <tr>
+    <th style="width: 20px">id</th>
+    <th>Самолёт</th>
+    <th colspan="2">Время вылета</th>
+    <th colspan="2">Время прилета</th>
+    <th colspan="2">Актуальное время вылета</th>
+    <th colspan="2">Актуальное время прилета</th>
+    <th>Аэропорт вылета</th>
+    <th>Аэропорт прилёта</th>
+    <th>Статус</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let flight of allflights">
+    <td>{{flight.id}}</td>
+    <td><label><input type="text" #aircraft (change)="setAircraft(aircraft.value,flight)"/></label></td>
+    <td><label>
+      <input #depdate type="date"  [valueAsDate]="flight.deptime" (change)="setDate(depdate.value, flight.deptime)">
+    </label></td>
+    <td><label>
+      <input #deptime type="time" [valueAsNumber]="flight.deptime" (change)="setTime(deptime.value, flight.deptime)">
+    </label></td>
+    <td><label>
+      <input #arrdate type="date"  [valueAsDate]="flight.arrtime" (change)="setDate(arrdate.value, flight.arrtime)">
+    </label></td>
+    <td><label>
+      <input #arrtime type="time" [valueAsNumber]="flight.arrtime" (change)="setTime(arrtime.value, flight.arrtime)">
+    </label></td>
+    <td><span *ngIf="flight.actualDeptime">
+     <label>
+      <input #actual_depdate type="date"  [valueAsDate]="flight.actualDeptime" (change)="setDate(actual_depdate.value, flight.actualDeptime)">
+    </label>
+    </span></td>
+    <td><span *ngIf="flight.actualDeptime">
+     <label>
+      <input #actual_deptime type="time"  [valueAsNumber]="flight.actualDeptime" (change)="setTime(actual_deptime.value, flight.actualDeptime)">
+    </label>
+    </span></td>
+    <td><span *ngIf="flight.actualArrtime">
+     <label>
+      <input #actual_arrdate type="date"  [valueAsDate]="flight.actualArrtime" (change)="setDate(actual_arrdate.value, flight.actualArrtime)">
+    </label>
+    </span></td>
+    <td><span *ngIf="flight.actualArrtime">
+     <label>
+      <input #actual_arrtime type="time"  [valueAsNumber]="flight.actualArrtime" (change)="setTime(actual_arrtime.value, flight.actualArrtime)">
+    </label>
+    </span></td>
+    <td><label>
+      <input #dep type="text" [value]="flight.dep" (change)="setDep(dep.value,flight)"/>
+    </label></td>
+    <td><label>
+      <input #arr type="text" [value]="flight.arr" (change)="setArr(arr.value,flight)"/>
+    </label></td>
+    <td>
+      <label>
+        <select [value]="flight.status">
+          <option>scheduled</option>
+          <option>delayed</option>
+          <option>departed</option>
+          <option>in air</option>
+          <option>expected</option>
+          <option>diverted</option>
+          <option>recovery</option>
+          <option>landed</option>
+          <option>arrived</option>
+          <option>cancelled</option>
+        </select>
+      </label>
+    </td>
+    <td><button> Удалить</button>
+      <button>Изменить</button></td>
+  </tr>
+</table>

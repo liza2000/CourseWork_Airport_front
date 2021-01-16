@@ -1,0 +1,56 @@
+<button (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
+
+<div *ngIf="addFormOpened" class="container addForm">
+
+    <label>Полёт<br/>
+    <input type="text" #newFligh/>
+  </label><br/>
+    <label>Стойка <br/>
+      <input type="number" min="1" max="100" #newGate/>
+    </label><br/>
+
+  <label>Начало<br/>
+    <input type="date" #newStartDate/>
+    <input type="time" #newStartTime>
+  </label><br/>
+  <label>Окончание<br/>
+    <input type="date" #newFinishDate/>
+    <input type="time" #newFinishTime>
+  </label><br/>
+
+  <label> <button>Добавить</button></label>
+</div>
+<table *ngIf="!addFormOpened">
+  <tr>
+    <th>Полет</th>
+    <th>Стойка</th>
+    <th>Дата начала</th>
+    <th>Время начала</th>
+    <th>Дата окончания</th>
+    <th>Время окончания</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let work of shedule">
+    <td>{{work.flight}}</td>
+    <td><label>
+      <input #gate type="number" min="0" max="100" [ngModel]="work.gate" (change)="setGate(gate.value, work)">
+    </label></td>
+    <td><label>
+      <input #startdate type="date"  [valueAsDate]="work.start" (change)="setStartDate(startdate.value, work)">
+    </label></td>
+    <td><label>
+      <input #starttime type="time" [valueAsNumber]="work.start" (change)="setStartTime(starttime.value, work)">
+    </label></td>
+    <td><label>
+      <input #finishDate type="date"  [valueAsDate]="work.finish" (change)="setFinishDate(finishDate.value, work)">
+    </label></td>
+    <td><label>
+      <input #finishTime type="time" [valueAsNumber]="work.finish" (change)="setFinishTime(finishTime.value, work)">
+    </label></td>
+
+    <td>
+      <button (click)="delete(work)">Удалить</button>
+      <button (click)="change(work)">Изменить</button>
+    </td>
+  </tr>
+</table>

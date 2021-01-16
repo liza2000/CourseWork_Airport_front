@@ -1,0 +1,49 @@
+label{
+  display: inline-block;
+  margin:0;
+  padding: 5px 3px;
+}
+
+select{
+  height:21px;
+}
+
+.menu{
+  float: right;
+  margin-right: 3rem;
+}
+
+
+table{
+  width: 100%;
+}
+.table-container{
+  background-color: darkcyan;
+  border: thick solid #e743ce;
+}
+@media(min-width: 1099px) {
+  .table-container {
+    margin: 5% auto;
+    min-width: 600px;
+    width: 70%;
+  }
+}
+@media(min-width: 877px) and (max-width: 1098px) {
+  .table-container{
+    margin: 5% auto;
+    max-width: 800px;
+    width: 70%;
+    min-width: 310px;
+  }
+}
+@media(max-width: 876px) {
+  .table-container{
+    margin: 5% auto;
+    width: 70%;
+    min-width: 310px;
+    max-width: 500px;
+  }
+}
+
+
+

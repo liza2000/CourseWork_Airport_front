@@ -1,0 +1,26 @@
+table{
+  width: 100%;
+}
+input{
+  text-align: center;
+  background-color: transparent;
+  border: transparent;
+  color: white;
+}
+
+.addForm{
+  width: 300px;
+}
+
+.addForm input{
+  background-color: white;
+  color: black;
+  width: 100px;
+  padding: 3px;
+}
+.addForm label, .addForm button {
+  padding: 3px;
+  margin: 3px;
+
+}
+

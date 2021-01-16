@@ -1,0 +1,11 @@
+<button [routerLink]="['/main']">На главную</button>
+<div align="center"  class="container">
+  <h1> Авторизация </h1>
+    <div class="formdiv">
+      <label for="password">ID
+        <input  required  autocomplete="false" type="password"  id="password" name="password"/></label>
+    </div>
+    <button type="submit" (click)="reg()" [routerLink]="['/employer']">Войти как сотрудник пункта регистрации</button>
+      <button type="submit" (click)="land()" [routerLink]="['/employer']">Войти как сотрудник пункта посадки</button>
+    <button type="submit"  [routerLink]="['/admin']">Войти как админ</button>
+</div>

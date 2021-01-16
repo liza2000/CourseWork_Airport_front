@@ -1,0 +1,59 @@
+<button [hidden]="sheduleOpened" (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
+<div *ngIf="addFormOpened" class="container addForm">
+  <label>Паспорт<br/>
+    <input type="text" #newPassport/>
+  </label><br/>
+  <label>Имя<br/>
+    <input type="text" #newName/>
+  </label><br/>
+  <label>Фамилия<br/>
+    <input type="text" #newSurname/>
+  </label><br/>
+  <label>Отчество<br/>
+    <input type="text" #newPathronymic/>
+  </label><br/>
+  <label>Должность<br/>
+    <input type="text" #newPosition/>
+  </label><br/>
+  <label>Компания<br/>
+    <input type="text" #newCompany/>
+  </label><br/>
+  <label> <button>Добавить</button></label>
+</div>
+<table *ngIf="!addFormOpened" [hidden]="sheduleOpened">
+  <tr>
+    <th>Паспорт</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Отчество</th>
+    <th>Должность</th>
+    <th>Компания</th>
+    <th></th>
+  </tr>
+<tr *ngFor="let emp of employeers">
+  <td>{{emp.passport}}</td>
+  <td><label>
+    <input type="text" #name [value]="emp.name" (change)="setName(name.value,emp)"/>
+  </label></td>
+  <td><label>
+    <input type="text" #surname [value]="emp.surname" (change)="setSurname(surname.value,emp)"/>
+  </label></td>
+  <td><label>
+    <input type="text" #pathronymic [value]="emp.pathronymic" (change)="setPathronymic(pathronymic.value,emp)"/>
+  </label></td>
+  <td><label>
+    <input type="text" #position [value]="emp.position" (change)="setPosition(position.value,emp)"/>
+  </label></td>
+  <td><label>
+    <input type="text" #company [value]="emp.company" (change)="setCompany(company.value,emp)"/>
+  </label></td>
+  <td style="width: 250px">
+    <button>Удалить</button>
+    <button>Изменить</button>
+    <button *ngIf="emp.position!=2" (click)="openShedule(emp)">Расписание</button>
+  </td>
+</tr>
+</table>
+
+<app-lend-shedule-control *ngIf="sheduleOpened"></app-lend-shedule-control>
+<button *ngIf="sheduleOpened" (click)="sheduleOpened=false"> Отменить</button>

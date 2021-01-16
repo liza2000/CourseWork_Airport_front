@@ -1,0 +1,25 @@
+<button (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
+
+<div *ngIf="addFormOpened" class="container addForm">
+  <label>Наименование<br/>
+    <input type="text" #name/>
+  </label><br/>
+  <label>Тип<br/>
+    <input type="text" #type/>
+  </label><br/>
+  <label> <button (click)="addNewCompany(name.value, type.value)">Добавить</button></label>
+</div>
+<table *ngIf="!addFormOpened">
+  <tr>
+    <th>Имя</th>
+    <th>Тип компании</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let comp of companies">
+    <td>{{comp.name}}</td>
+    <td>{{comp.type}}</td>
+    <td >
+      <button (click)="delete(comp)">Удалить</button>
+    </td>
+  </tr>
+</table>

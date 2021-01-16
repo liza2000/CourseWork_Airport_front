@@ -1,0 +1,17 @@
+<div class="regform container">
+  <label> Номер паспорта:
+    <input type="text" (change)="passport.checkValidity() && setPassport(passport.value)"
+           #passport   pattern="^[0-9]+$" maxlength="10" minlength="10" >
+  </label>
+  <br/>
+  <label *ngIf="passenger&&passenger.hasbaggage" >Багаж:
+   <select  #baggage (change)="setBaggageStatus(baggage.value)">
+     <option>sent</option>
+     <option>returned</option>
+     <option>lost</option>
+   </select>
+  </label>
+  <span *ngIf="passenger&&!passenger.hasbaggage">Багажа нет</span>
+  <br/>
+  <button (click)="toLand()">Отправить</button>
+</div>

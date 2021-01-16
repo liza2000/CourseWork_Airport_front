@@ -1,0 +1,33 @@
+<button (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
+
+<div *ngIf="addFormOpened" class="container addForm">
+  <label>Модель<br/>
+    <input type="text" #newAircraftModel/>
+  </label><br/>
+  <label>Компания<br/>
+    <input type="text" #newAircraftCompany/>
+  </label><br/>
+ <label> <button>Добавить</button></label>
+</div>
+<table *ngIf="!addFormOpened">
+  <tr>
+  <th>id</th>
+  <th>model</th>
+  <th>company</th>
+  <th>location</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let aircraft of aircrafts">
+    <td>{{aircraft.id}}</td>
+    <td><label>
+      <input type="text" #model [value]="aircraft.aircraftmodel" (change)="setModel(model.value,aircraft)"/>
+    </label></td>
+    <td><label>
+      <input type="text" #company [value]="aircraft.company" (change)="setCompany(company.value,aircraft)"/>
+    </label></td>
+    <td>{{aircraft.location}}</td>
+    <td style="width: 150px">
+    <button>Удалить</button>
+    <button>Изменить</button></td>
+  </tr>
+</table>

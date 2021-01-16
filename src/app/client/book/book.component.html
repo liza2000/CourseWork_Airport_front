@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="forlabel">
+  <label> Количество пассажиров
+  <input type="number" min="1" max="{{flight.count}}" #cnt [value]="count" (change)=" cnt.checkValidity()&&changeCount(cnt.value)">
+  </label>
+  </div>
+  <br/>
+  <form>
+    <div class="passengers">
+    <div class="passenger" *ngFor="let p of passengers">
+  <label> Паспорт:
+    <input type="text" pattern="^[0-9]+$" maxlength="10" minlength="10"  #passport (change)="setPassport(p,passport.value)"/>
+  </label><br/>
+  <label> Фамилия:
+    <input type="text"  (change)="setSecondName(p,secname.value)" #secname/>
+  </label><br/>
+  <label> Имя:
+    <input type="text"  (change)="setName(p,name.value)" #name/>
+  </label><br/>
+  <label> Отчество:
+    <input type="text"  (change)="setThirdName(p,thirdname.value)" #thirdname/>
+  </label><br/>
+  <label> Дата рождения:
+    <input type="date"  (change)="setBornDate(p,borndate.value)" #borndate/>
+  </label><br/>
+  <label> Место:
+    <select #seat (change)="setSeat(p,seat.value)">
+      <option>Не выбрано</option>
+    </select>
+  </label><br/>
+  <label >Вес багажа
+    <input  type="text" pattern="^[0-9]*[.,]?[0-9]+$" #baggage (change)="setBaddage(p,baggage.value)"/>
+  </label><br/>
+  <label>Комната ожидания
+    <select  #room (change)="setRoom(p,room.value)">
+      <option selected>Middle</option>
+      <option>Комфорт</option>
+      <option>Комфорт+</option>
+    </select>
+    <br/><br/>
+  </label><br/>
+    </div>
+    </div>
+    <br/>
+    <div class="forlabel">
+    <label>Контактная информация<br/>
+    <textarea (change)="setContact(contact.value)" #contact></textarea><br/>
+  </label><br/>
+      <button type="submit" (click)="sendBook()">Забронировать</button></div>
+  </form>
+
+</div>

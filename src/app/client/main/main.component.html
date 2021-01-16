@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="menu">
+    <button [routerLink]="['/login']">
+      Войти
+    </button><br/>
+  <label>Изменить бронь<br/>
+    <input type="text" required #bookid/><br/>
+  <button (click)="bookid.checkValidity()&&loadBook(bookid.value)"  [routerLink]="['/change-book']">Изменить</button>
+  </label>
+</div>
+    <div id="form">
+      <form>
+          <label id="from_label">Откуда: <br>
+            <select #dep>
+              <option selected>
+                Не выбрано
+              </option>
+              <option *ngFor="let punct of puncts">
+                {{punct}}
+              </option>
+              </select>
+          </label>
+          <label>Куда: <br>
+            <select  #arr>
+              <option selected>
+                Не выбрано
+              </option>
+              <option *ngFor="let punct of puncts">
+                {{punct}}
+              </option>
+            </select>
+          </label>
+          <label>Когда:<br>
+            <input type="date" #date>
+          </label>
+        <label>Сколько:<br>
+          <input type="number" min="1" value="0"  #count style="width: 30px">
+        </label>
+        <button (click)="searchFlights(dep.value,arr.value,date.value,count.value)">Найти билеты</button>
+      </form>
+    </div>
+  <div [hidden]="allflights.length==0" class="table-container" *ngIf="!bookMode">
+      <table>
+        <tr>
+          <th>Откуда</th>
+          <th>Куда</th>
+          <th>Время вылета</th>
+          <th>Количество</th>
+          <th> </th>
+        </tr>
+        <tr *ngFor="let flight of currentflights">
+          <td>{{flight.dep}}</td>
+          <td>{{flight.arr}}</td>
+          <td >{{flight.deptime.toLocaleTimeString()}}</td>
+          <td >{{flight.count}}</td>
+          <td><button (click)="bookMode=true; toBook(flight)">Забронировать</button></td>
+        </tr>
+      </table>
+  </div>
+  <app-book *ngIf=bookMode></app-book>
+  <br/>
+  <button *ngIf="bookMode" (click)="bookMode=false">Отменить</button>
+</div>

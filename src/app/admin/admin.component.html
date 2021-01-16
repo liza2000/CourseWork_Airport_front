@@ -1,0 +1,15 @@
+<button [routerLink]="['/login']">
+  Выйти
+</button>
+<div class="container">
+<p><a (click)="currentControl=1">Управление сотрудниками</a></p>
+<p><a (click)="currentControl=2">Управление полётами</a></p>
+<p><a (click)="currentControl=3">Управление самолётами</a></p>
+<p><a (click)="currentControl=6">Управление компаниями</a></p>
+</div>
+<div class="container control" *ngIf="currentControl!=0">
+<app-employee-control *ngIf="currentControl==1"></app-employee-control>
+<app-flight-control *ngIf="currentControl==2"></app-flight-control>
+<app-aircraft-control *ngIf="currentControl==3"></app-aircraft-control>
+<app-companies-control *ngIf="currentControl==6"></app-companies-control>
+</div>

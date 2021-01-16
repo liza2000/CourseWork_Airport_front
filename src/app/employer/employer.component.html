@@ -1,0 +1,26 @@
+ <button [routerLink]="['/login']">
+    Выйти
+  </button>
+ <div class="container" *ngIf="!isReady">
+  <table>
+    <tr>
+      <th>Полет</th>
+      <th>Стойка</th>
+      <th>Начало</th>
+      <th>Конец</th>
+    </tr>
+    <tr *ngFor="let work of shedule">
+      <td>{{work.flight}}</td>
+      <td>{{work.gate}}</td>
+      <td>{{work.start.toLocaleDateString()}} {{work.start.toLocaleTimeString()}}</td>
+      <td >{{work.finish.toLocaleDateString()}} {{work.finish.toLocaleTimeString()}}</td>
+      <td><button *ngIf="checkActualWork(work)" (click)="toRegistration(work.flight)">{{isReg?'Преступить к регистрации':'Начать посадку'}}</button></td>
+    </tr>
+  </table>
+  </div>
+ <div class="container" *ngIf="isReady">
+   <app-registration *ngIf="isReg"></app-registration>
+   <app-landing *ngIf="!isReg"></app-landing>
+ </div>
+
+
