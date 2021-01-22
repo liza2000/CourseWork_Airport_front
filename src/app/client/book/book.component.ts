@@ -15,6 +15,7 @@ public flight: number;
 public passengers: Passenger[] = [] ;
 public contactInfo: string;
 public bookKey;
+countOfBusiness: number;
 limit: number;
 public count;
   constructor(private betweenComponentsService: BetweenComponentsService, private bookTicketsService: BookTicketsService) { }
@@ -22,6 +23,7 @@ public count;
   ngOnInit() {
     this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
     this.betweenComponentsService.currentCount.subscribe(message => this.limit = message);
+    this.bookTicketsService.getCountOfBusinessSeats(this.flight).subscribe(data => this.countOfBusiness = data as number);
     this.passengers.push(new Passenger());
     this.count = 1;
   }

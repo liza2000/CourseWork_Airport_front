@@ -11,24 +11,18 @@
     <div id="form" >
       <form>
           <label id="from_label">Откуда: <br>
-            <select #dep>
+            <input type="text" #dep list="from">
+            <datalist id="from">
               <option selected>
                 Не выбрано
               </option>
               <option *ngFor="let punct of puncts">
                 {{punct}}
               </option>
-              </select>
+            </datalist>
           </label>
           <label>Куда: <br>
-            <select  #arr>
-              <option selected>
-                Не выбрано
-              </option>
-              <option *ngFor="let punct of puncts">
-                {{punct}}
-              </option>
-            </select>
+            <input type="text" list="from"  #arr>
           </label>
           <label>Когда:<br>
             <input type="date" #date>

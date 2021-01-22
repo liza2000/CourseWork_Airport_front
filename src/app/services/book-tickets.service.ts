@@ -48,4 +48,7 @@ export class BookTicketsService {
   changeContactInfo(info: string) {
     return this.httpClient.post('mnm', {contact: info}, {headers: BookTicketsService.getHeaders()});
   }
+  getCountOfBusinessSeats(flight: number) {
+    return this.httpClient.post('mnm', {id: flight}, {headers: BookTicketsService.getHeaders()});
+  }
 }
