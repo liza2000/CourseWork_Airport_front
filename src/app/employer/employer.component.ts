@@ -14,20 +14,20 @@ export class EmployerComponent implements OnInit {
   public shedule: WorkAtTime[] = [];
   public isReady = false;
   public isReg;
-  constructor(private router: Router, private bookService: BetweenComponentsService) { }
+  constructor(private router: Router, private betweenComponentsService: BetweenComponentsService) { }
   ngOnInit() {
-    this.bookService.currentEmplFlag.subscribe(message => this.isReg = message);
+    this.betweenComponentsService.currentEmplFlag.subscribe(message => this.isReg = message);
     this.shedule.push(this.work);
     this.shedule.push(this.work1);
     // todo тут я принимаю из сервиса расписание
   }
  checkActualWork(work: WorkAtTime) {
     const date: Date = new Date();
-    return true;
+    //return date < work.finish && date > work.start;
+   return true;
   }
   public toRegistration(flight: number) {
-    // todo getflight
-   // this.bookService.sendMessage(flight);
+    this.betweenComponentsService.sendFlight(flight);
     this.isReady = true;
   }
 

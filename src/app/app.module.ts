@@ -21,6 +21,7 @@ import {FlightsSearchService} from './services/flights-search.service';
 import {BetweenComponentsService} from './services/betweenComponents.service';
 import {HttpClientModule} from '@angular/common/http';
 import {BookTicketsService} from './services/book-tickets.service';
+import {RegistrationService} from './services/registration.service';
 const appRoutes: Routes = [
   {
   path: 'main',
@@ -72,7 +73,7 @@ const appRoutes: Routes = [
   HttpClientModule,
   RouterModule.forRoot(appRoutes)
   ],
-  providers: [FlightsSearchService, BetweenComponentsService, BookTicketsService],
+  providers: [FlightsSearchService, BetweenComponentsService, BookTicketsService, RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

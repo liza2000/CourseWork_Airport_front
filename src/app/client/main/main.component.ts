@@ -28,7 +28,7 @@ this.flightService.getFlights(dep, arr, new Date(date), Number(count))
   .subscribe(data => ( data as Flight[]).forEach(f => this.allflights.push(f)));
 this.bookMode = false;
   }
-  public toBook(flight: Flight) {
+  public toBook(flight: number) {
     this.bookService.sendFlight(flight);
   }
   loadBook(val: string) {

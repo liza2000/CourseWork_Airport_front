@@ -53,7 +53,7 @@
           <td>{{flight.arr}}</td>
           <td >{{flight.deptime.toLocaleTimeString()}}</td>
           <td >{{flight.count}}</td>
-          <td><button (click)="bookMode=true; toBook(flight)">Забронировать</button></td>
+          <td><button (click)="bookMode=true; toBook(flight.id)">Забронировать</button></td>
         </tr>
       </table>
   </div>

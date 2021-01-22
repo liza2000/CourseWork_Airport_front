@@ -13,10 +13,10 @@ export class Passenger {
   public hasbaggage = true;
   constructor(
   ) {
-    this.passport = 'hvhv' + Passenger.p++;
-    this.name = 'gdfgd';
-    this.secondName = 'hdgf';
-    this.thirdName = 'dfd';
-    this.bornDate = new Date();
+    // this.passport = 'hvhv' + Passenger.p++;
+    // this.name = 'gdfgd';
+    // this.secondName = 'hdgf';
+    // this.thirdName = 'dfd';
+    // this.bornDate = new Date();
   }
 }
