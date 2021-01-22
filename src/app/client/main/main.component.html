@@ -48,7 +48,7 @@
           <th>Количество</th>
           <th> </th>
         </tr>
-        <tr *ngFor="let flight of currentflights">
+        <tr *ngFor="let flight of allflights">
           <td>{{flight.dep}}</td>
           <td>{{flight.arr}}</td>
           <td >{{flight.deptime.toLocaleTimeString()}}</td>
