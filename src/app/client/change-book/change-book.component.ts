@@ -21,9 +21,7 @@ book: Book = new Book();
   ngOnInit() {
     this.betweenCompService.currentBookID.subscribe(data => this.bookID = data);
     this.bookService.getBook(this.bookID).subscribe(data => this.book = data as Book);
-    for (let i = 0; i < this.book.count; i++) {
-      this.passengers.push(new Passenger());
-    }
+    this.passengers = this.book.passengers;
   }
   setSeat(pass: Passenger, value: string) {
     pass.seat = value;
@@ -37,6 +35,7 @@ book: Book = new Book();
   }
   setContact(v) {
     this.contactInfo = v;
+    this.bookService.changeContactInfo(this.contactInfo);
   }
   change(p: Passenger) {
     this.bookService.changeTicket(p, this.bookID);

@@ -45,4 +45,7 @@ export class BookTicketsService {
     };
     return this.httpClient.post('mnm', body, {headers: BookTicketsService.getHeaders()});
   }
+  changeContactInfo(info: string) {
+    return this.httpClient.post('mnm', {contact: info}, {headers: BookTicketsService.getHeaders()});
+  }
 }
