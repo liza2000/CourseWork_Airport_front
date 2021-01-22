@@ -30,7 +30,7 @@
     </select>
   </label><br/>
   <label >Вес багажа
-    <input  type="text" pattern="^[0-9]*[.,]?[0-9]+$" #baggage (change)="setBaddage(p,baggage.value)"/>
+    <input  type="text" pattern="^[0-9]*[.,]?[0-9]+$" #baggage (change)="setBaggage(p,baggage.value)"/>
   </label><br/>
   <label>Комната ожидания
     <select  #room (change)="setRoom(p,room.value)">

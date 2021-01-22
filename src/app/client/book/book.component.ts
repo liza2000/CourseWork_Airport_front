@@ -52,7 +52,7 @@ public count;
   setRoom(pass: Passenger, value: string) {
     pass.waitingRoom = value;
   }
-  setBaddage(pass: Passenger, value: string) {
+  setBaggage(pass: Passenger, value: string) {
     pass.maxWeight = Number(value);
   }
 
