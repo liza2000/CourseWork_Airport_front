@@ -8,8 +8,8 @@ import {Flight} from '../../model/flight';
 })
 export class FlightControlComponent implements OnInit {
   addFormOpened = false;
-  public flight: Flight = new Flight('kjk', 'njkj', new Date('2020-12-17T11:00:00'), new Date('2020-12-17T11:00:00'), 9);
-  public flight1: Flight = new Flight('kjfk', 'njgfgkj', new Date('2020-12-17T11:00:00'), new Date('2020-12-17T11:00:00'), 5);
+  public flight: Flight = new Flight();
+  public flight1: Flight = new Flight();
   public allflights: Flight[] = [];
   constructor() { }
 

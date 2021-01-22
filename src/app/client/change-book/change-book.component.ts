@@ -15,7 +15,7 @@ export class ChangeBookComponent implements OnInit {
 passengers: Passenger[] = [];
 contactInfo: string;
 bookID: string;
-book: Book;
+book: Book = new Book();
   constructor(private bookService: BookTicketsService, private betweenCompService: BetweenComponentsService) { }
 
   ngOnInit() {
@@ -32,16 +32,16 @@ book: Book;
   setRoom(pass: Passenger, value: string) {
     pass.waitingRoom = value;
   }
-  setBaddage(pass: Passenger, value: string) {
+  setBaggage(pass: Passenger, value: string) {
     pass.maxWeight = Number(value);
   }
   setContact(v) {
     this.contactInfo = v;
   }
-  change(p: Passenger, bookID: string) {
-    this.bookService.changeTicket(p, bookID);
+  change(p: Passenger) {
+    this.bookService.changeTicket(p, this.bookID);
   }
   delete(p: Passenger) {
-    // todo удаление билета
+    this.bookService.deleteTicket(p, this.bookID);
   }
 }

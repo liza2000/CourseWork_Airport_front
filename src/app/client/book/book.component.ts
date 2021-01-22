@@ -70,8 +70,5 @@ public count;
     }
     this.count = cnt;
   }
-  loadBook() {
-
-  }
 
 }

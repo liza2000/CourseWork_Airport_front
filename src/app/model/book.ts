@@ -8,5 +8,7 @@ export class Book {
   passengers: Passenger[];
   contact: string;
   flight: Flight;
-  count: number;
+  count = 3;
+  constructor(){
+  }
 }

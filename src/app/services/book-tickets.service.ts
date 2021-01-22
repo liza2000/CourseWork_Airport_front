@@ -38,4 +38,11 @@ export class BookTicketsService {
     };
     return this.httpClient.post('mnm', body, {headers: BookTicketsService.getHeaders()});
   }
+  deleteTicket(p: Passenger, bookID: string) {
+    const body = {
+      passport: p.passport,
+      book: bookID
+    };
+    return this.httpClient.post('mnm', body, {headers: BookTicketsService.getHeaders()});
+  }
 }

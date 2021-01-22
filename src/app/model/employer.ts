@@ -1,5 +1,4 @@
 export class Employer {
-  positionType: Position;
   passport: number;
   name: string;
   surname: string;
