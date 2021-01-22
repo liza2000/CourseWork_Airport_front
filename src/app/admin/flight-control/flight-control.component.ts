@@ -16,9 +16,9 @@ export class FlightControlComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    // this.adminService.getPuncts().subscribe(data => (data as string[]).forEach( p => this.puncts.push(p)),
-    //     error => alert('ошибка при загрузке пунктов'));
-    // this.adminService.getFlights().subscribe(data => this.allflights = data as Flight[], error => alert('Ошибка при загрузке полётов'));
+    this.adminService.getPuncts().subscribe(data => (data as string[]).forEach( p => this.puncts.push(p)),
+        error => alert('ошибка при загрузке пунктов'));
+    this.adminService.getFlights().subscribe(data => this.allflights = data as Flight[], error => alert('Ошибка при загрузке полётов'));
     this.allflights.push(this.flight);
   }
   setTime(time: string, date: Date) {
