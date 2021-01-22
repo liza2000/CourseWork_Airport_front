@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AppComponent} from '../app.component';
+import {Flight} from '../model/flight';
 
 @Injectable()
 export class FlightsSearchService {

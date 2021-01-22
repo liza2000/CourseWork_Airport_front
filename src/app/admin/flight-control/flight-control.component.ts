@@ -9,8 +9,8 @@ import {AdminService} from '../../services/admin.service';
 })
 export class FlightControlComponent implements OnInit {
   addFormOpened = false;
-  public flight: Flight = new Flight();
-  public flight1: Flight = new Flight();
+  // public flight: Flight = new Flight();
+  // public flight1: Flight = new Flight();
   public allflights: Flight[] = [];
   public puncts: string[];
   constructor(private adminService: AdminService) { }
@@ -19,11 +19,11 @@ export class FlightControlComponent implements OnInit {
     this.adminService.getPuncts().subscribe(data => (data as string[]).forEach( p => this.puncts.push(p)),
         error => alert('ошибка при загрузке пунктов'));
     this.adminService.getFlights().subscribe(data => this.allflights = data as Flight[], error => alert('Ошибка при загрузке полётов'));
-    this.allflights.push(this.flight);
+   // this.allflights.push(this.flight);
   }
   setTime(time: string, date: Date) {
     date.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
-    alert(this.flight.deptime);
+    //alert(this.flight.deptime);
   }
   setDate(date: string, flightDate: Date) {
     flightDate.setFullYear(new Date(date).getFullYear());

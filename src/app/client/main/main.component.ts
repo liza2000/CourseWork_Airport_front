@@ -12,16 +12,16 @@ import {FlightsSearchService} from '../../services/flights-search.service';
 export class MainComponent implements OnInit {
 
   constructor(public betweenComponentsService: BetweenComponentsService, public flightService: FlightsSearchService) { }
-  public flight: Flight = new Flight();
-  public flight1: Flight = new Flight();
+  // public flight: Flight = new Flight();
+  // public flight1: Flight = new Flight();
   public allflights: Flight[] = [];
   public puncts: string[] = [];
 
   public bookMode = false;
   ngOnInit() {
     this.flightService.getPuncts().subscribe(data => (data as string[]).forEach( p => this.puncts.push(p)));
-    this.allflights.push(this.flight);
-    this.allflights.push(this.flight1);
+    // this.allflights.push(this.flight);
+    // this.allflights.push(this.flight1);
   }
   searchFlights(dep: string, arr: string, date: string, count: string) {
 this.flightService.getFlights(dep, arr, new Date(date), Number(count))

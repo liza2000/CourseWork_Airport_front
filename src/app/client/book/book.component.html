@@ -1,5 +1,7 @@
-
-<div class="container">Полёт № {{flight}}<br/>
+<div class="container">
+  Полёт № {{flight}}<br/>
+  Количество билетов класса "Бизнес": {{countOfBusiness}}<br/>
+  Количество билетов класса "Эконом": {{limit - countOfBusiness}}<br/>
   <div class="forlabel">
   <label> Количество пассажиров
   <input type="number" min="1" max="{{limit}}" #cnt [value]="count" (change)=" cnt.checkValidity()&&changeCount(cnt.value)">
@@ -48,6 +50,7 @@
     <label>Контактная информация<br/>
     <textarea (change)="setContact(contact.value)" #contact></textarea><br/>
   </label><br/>
+      <button (click)="calculateAmount()">Расчитать цену</button>
       <button type="submit" (click)="sendBook()">Забронировать</button></div>
   </form>
 

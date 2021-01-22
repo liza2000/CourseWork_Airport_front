@@ -17,6 +17,7 @@ public contactInfo: string;
 public bookKey;
 countOfBusiness: number;
 limit: number;
+totalAmount: number;
 public count;
   constructor(private betweenComponentsService: BetweenComponentsService, private bookTicketsService: BookTicketsService) { }
 
@@ -73,5 +74,8 @@ public count;
     }
     this.count = cnt;
   }
+  // calculateAmount() {
+  //   this.bookTicketsService.calculate().subscribe(data =>  this.totalAmount = data as number);
+  // }
 
 }
