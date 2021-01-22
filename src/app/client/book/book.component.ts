@@ -24,8 +24,8 @@ public count;
     this.count = 1;
   }
   sendBook() {
-   this.bookKey = this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight, this.count)
-     .subscribe(data => (data as number).valueOf());
+   this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight, this.count)
+     .subscribe(data => this.bookKey = data as number);
   }
   setContact(v) {
     this.contactInfo = v;
