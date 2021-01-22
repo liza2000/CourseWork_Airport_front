@@ -25,7 +25,13 @@ export class MainComponent implements OnInit {
   }
   searchFlights(dep: string, arr: string, date: string, count: string) {
 this.flightService.getFlights(dep, arr, new Date(date), Number(count))
-  .subscribe(data => ( data as Flight[]).forEach(f => this.allflights.push(f)));
+  .subscribe((data: Response) => {
+    const res = JSON.parse(JSON.stringify(data.body));
+    for (let i in res ) {
+      this.allflights.push(new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
+        res[i]['deptime'],res[i]['arrtime'], res[i]['count']));
+    }
+  } );
 this.bookMode = false;
   }
   public toBook(flight: Flight) {
