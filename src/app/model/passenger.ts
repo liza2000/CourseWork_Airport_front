@@ -9,14 +9,8 @@ export class Passenger {
   public seat: string;
   public maxWeight = 0;
   public totalWeight: number;
-  public baggageStatus: string;
+  public baggageStatus = 'accept';
   public hasbaggage = true;
   constructor(
-  ) {
-    // this.passport = 'hvhv' + Passenger.p++;
-    // this.name = 'gdfgd';
-    // this.secondName = 'hdgf';
-    // this.thirdName = 'dfd';
-    // this.bornDate = new Date();
-  }
+  ) {}
 }

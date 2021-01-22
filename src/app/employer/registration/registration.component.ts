@@ -14,10 +14,10 @@ export class RegistrationComponent implements OnInit {
   public passenger: Passenger;
   public overWeight = 0;
   public startReg = false;
-  constructor(private regService: RegistrationService, private bookService: BetweenComponentsService) { }
+  constructor(private regService: RegistrationService, private betweenComponentsService: BetweenComponentsService) { }
 
   ngOnInit() {
-    this.bookService.currentFlight.subscribe(message => this.flight = message);
+    this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
   }
   setPassport(v: string) {
     this.passenger = new Passenger();
