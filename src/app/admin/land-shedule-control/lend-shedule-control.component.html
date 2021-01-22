@@ -3,7 +3,7 @@
 <div *ngIf="addFormOpened" class="container addForm">
 
     <label>Полёт<br/>
-    <input type="text" #newFligh/>
+    <input type="text" #newFlight/>
   </label><br/>
     <label>Стойка <br/>
       <input type="number" min="1" max="100" #newGate/>
@@ -18,7 +18,7 @@
     <input type="time" #newFinishTime>
   </label><br/>
 
-  <label> <button>Добавить</button></label>
+  <label> <button (click)="addNew(newFlight.value, newStartDate.value, newStartTime.value, newFinishDate.value, newFinishTime.value, newGate.value)">Добавить</button></label>
 </div>
 <table *ngIf="!addFormOpened">
   <tr>
@@ -30,7 +30,7 @@
     <th>Время окончания</th>
     <th></th>
   </tr>
-  <tr *ngFor="let work of shedule">
+  <tr *ngFor="let work of schedule">
     <td>{{work.flight}}</td>
     <td><label>
       <input #gate type="number" min="0" max="100" [ngModel]="work.gate" (change)="setGate(gate.value, work)">

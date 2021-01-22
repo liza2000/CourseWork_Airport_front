@@ -11,7 +11,7 @@ import {BookTicketsService} from '../../services/book-tickets.service';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
-public flight: Flight;
+public flight: number;
 public passengers: Passenger[] = [] ;
 public contactInfo: string;
 public bookKey;
@@ -44,7 +44,6 @@ public count;
   }
   setBornDate(pass: Passenger, value: string) {
     pass.bornDate = new Date(value);
-    alert(pass.bornDate);
   }
   setSeat(pass: Passenger, value: string) {
     pass.seat = value;

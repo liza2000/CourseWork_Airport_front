@@ -18,7 +18,7 @@
   <label>Компания<br/>
     <input type="text" #newCompany/>
   </label><br/>
-  <label> <button>Добавить</button></label>
+  <label> <button (click)="addNewEmpl(newPassport.value,newName.value,newSurname.value, newPathronymic.value, newPosition.value, newCompany.value)">Добавить</button></label>
 </div>
 <table *ngIf="!addFormOpened" [hidden]="sheduleOpened">
   <tr>
@@ -42,15 +42,18 @@
     <input type="text" #pathronymic [value]="emp.pathronymic" (change)="setPathronymic(pathronymic.value,emp)"/>
   </label></td>
   <td><label>
-    <input type="text" #position [value]="emp.position" (change)="setPosition(position.value,emp)"/>
+    <select #position [value]="emp.position" (change)="setPosition(position.value,emp)">
+      <option>reception</option>
+      <option>gate</option>
+    </select>
   </label></td>
   <td><label>
     <input type="text" #company [value]="emp.company" (change)="setCompany(company.value,emp)"/>
   </label></td>
   <td style="width: 250px">
-    <button>Удалить</button>
-    <button>Изменить</button>
-    <button *ngIf="emp.position!=2" (click)="openShedule(emp)">Расписание</button>
+    <button (click)="delete(emp.passport)">Удалить</button>
+    <button (click)="change(emp)">Изменить</button>
+    <button *ngIf="emp.position!=2" (click)="openSchedule(emp)">Расписание</button>
   </td>
 </tr>
 </table>

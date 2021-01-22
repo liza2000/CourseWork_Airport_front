@@ -9,7 +9,7 @@
       <th>Начало</th>
       <th>Конец</th>
     </tr>
-    <tr *ngFor="let work of shedule">
+    <tr *ngFor="let work of schedule">
       <td>{{work.flight}}</td>
       <td>{{work.gate}}</td>
       <td>{{work.start.toLocaleDateString()}} {{work.start.toLocaleTimeString()}}</td>
