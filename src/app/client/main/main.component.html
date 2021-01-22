@@ -8,7 +8,7 @@
   <button (click)="bookid.checkValidity()&&loadBook(bookid.value)"  [routerLink]="['/change-book']">Изменить</button>
   </label>
 </div>
-    <div id="form">
+    <div id="form" >
       <form>
           <label id="from_label">Откуда: <br>
             <select #dep>
@@ -53,7 +53,7 @@
           <td>{{flight.arr}}</td>
           <td >{{flight.deptime.toLocaleTimeString()}}</td>
           <td >{{flight.count}}</td>
-          <td><button (click)="bookMode=true; toBook(flight.id)">Забронировать</button></td>
+          <td><button (click)="bookMode=true; toBook(flight)">Забронировать</button></td>
         </tr>
       </table>
   </div>

@@ -18,6 +18,7 @@ export class EmployerComponent implements OnInit {
   constructor(private router: Router, private betweenComponentsService: BetweenComponentsService,
               private scheduleService: ScheduleService) { }
   ngOnInit() {
+    if (localStorage.getItem('CurrentEmpl') == null) { this.router.navigate(['/main']); }
     this.isReg = localStorage.getItem('PositionOfCurrentEmpl') === 'reception';
     this.schedule.push(this.work);
     this.schedule.push(this.work1);

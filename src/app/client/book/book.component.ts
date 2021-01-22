@@ -15,11 +15,13 @@ public flight: number;
 public passengers: Passenger[] = [] ;
 public contactInfo: string;
 public bookKey;
+limit: number;
 public count;
-  constructor(private bookService: BetweenComponentsService, private bookTicketsService: BookTicketsService) { }
+  constructor(private betweenComponentsService: BetweenComponentsService, private bookTicketsService: BookTicketsService) { }
 
   ngOnInit() {
-    this.bookService.currentFlight.subscribe(message => this.flight = message);
+    this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
+    this.betweenComponentsService.currentCount.subscribe(message => this.limit = message);
     this.passengers.push(new Passenger());
     this.count = 1;
   }

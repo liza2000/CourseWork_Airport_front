@@ -11,7 +11,7 @@ import {FlightsSearchService} from '../../services/flights-search.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor( public bookService: BetweenComponentsService, public flightService: FlightsSearchService) { }
+  constructor(public betweenComponentsService: BetweenComponentsService, public flightService: FlightsSearchService) { }
   public flight: Flight = new Flight();
   public flight1: Flight = new Flight();
   public allflights: Flight[] = [];
@@ -28,10 +28,11 @@ this.flightService.getFlights(dep, arr, new Date(date), Number(count))
   .subscribe(data => ( data as Flight[]).forEach(f => this.allflights.push(f)));
 this.bookMode = false;
   }
-  public toBook(flight: number) {
-    this.bookService.sendFlight(flight);
+  public toBook(flight: Flight) {
+    this.betweenComponentsService.sendFlight(flight.id);
+    this.betweenComponentsService.sendCount(flight.count);
   }
   loadBook(val: string) {
-    this.bookService.sendBookID(val);
+    this.betweenComponentsService.sendBookID(val);
   }
 }

@@ -11,9 +11,12 @@ export class BetweenComponentsService {
   private isRegistration;
   private employer: Employer;
   private bookID: string;
+  private countOfFlights;
   constructor() {}
   private flightSource = new BehaviorSubject<number>(this.flight);
   currentFlight = this.flightSource.asObservable();
+  private countSource=new BehaviorSubject<number>(this.countOfFlights);
+  currentCount = this.countSource.asObservable();
   private EmplFlagSource = new BehaviorSubject<boolean>(this.isRegistration);
   currentEmplFlag = this.EmplFlagSource.asObservable();
   private EmplSource = new BehaviorSubject<Employer>(this.employer);
@@ -31,5 +34,8 @@ export class BetweenComponentsService {
   }
   sendBookID(val: string) {
     this.bookIDSource.next((val));
+  }
+  sendCount(val: number) {
+    this.countSource.next(val);
   }
 }

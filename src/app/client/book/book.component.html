@@ -1,7 +1,8 @@
-<div class="container">
+
+<div class="container">Полёт № {{flight}}<br/>
   <div class="forlabel">
   <label> Количество пассажиров
-  <input type="number" min="1" max="{{flight.count}}" #cnt [value]="count" (change)=" cnt.checkValidity()&&changeCount(cnt.value)">
+  <input type="number" min="1" max="{{limit}}" #cnt [value]="count" (change)=" cnt.checkValidity()&&changeCount(cnt.value)">
   </label>
   </div>
   <br/>
