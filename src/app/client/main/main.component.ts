@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
   constructor(public betweenComponentsService: BetweenComponentsService, public flightService: FlightsSearchService) { }
   // public flight: Flight = new Flight();
   // public flight1: Flight = new Flight();
-  public allflights: Flight[] = [];
+  public allflights: Array<Flight> = new Array<Flight>();
   public puncts: string[] = [];
 
   public bookMode = false;
@@ -23,16 +23,22 @@ export class MainComponent implements OnInit {
     // this.allflights.push(this.flight);
     // this.allflights.push(this.flight1);
   }
+
   searchFlights(dep: string, arr: string, date: string, count: string) {
-this.flightService.getFlights(dep, arr, new Date(date), Number(count))
+  this.flightService.getFlights(dep, arr, new Date(date), Number(count))
   .subscribe((data: Response) => {
-    const res = JSON.parse(JSON.stringify(data.body));
+    const res = JSON.parse(JSON.stringify(data));
     for (let i in res ) {
-      this.allflights.push(new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
-        res[i]['deptime'],res[i]['arrtime'], res[i]['count']));
+      console.log(res[i]['arr']);
+      let flight = new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
+        res[i]['deptime'],res[i]['arrtime'], res[i]['count']);
+      console.log(flight);
+      this.allflights.push(flight);
     }
   } );
-this.bookMode = false;
+  console.log(this.allflights)
+  this.bookMode = false;
+
   }
   public toBook(flight: Flight) {
     this.betweenComponentsService.sendFlight(flight.id);

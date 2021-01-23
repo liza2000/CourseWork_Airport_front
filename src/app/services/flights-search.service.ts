@@ -15,7 +15,7 @@ export class FlightsSearchService {
     return headers;
   }
   getPuncts(): Observable<any> {
-    return this.httpClient.get('gfg', {headers: FlightsSearchService.getHeaders()});
+    return this.httpClient.get('http://localhost:8000/flight/search/direction/', {headers: FlightsSearchService.getHeaders()});
   }
   getFlights(depart: string, arrival: string, d: Date, c: number) {
     const body = {
@@ -23,7 +23,7 @@ export class FlightsSearchService {
       arr: arrival,
       date: d,
       count: c};
-    return this.httpClient.post(AppComponent.API_URL + '/', body, {headers: FlightsSearchService.getHeaders()});
+    return this.httpClient.post(AppComponent.API_URL + 'flight/get/', body, {headers: FlightsSearchService.getHeaders()});
   }
   }
 

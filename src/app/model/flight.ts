@@ -1,14 +1,14 @@
 export class Flight {
-  public aircraft: string;
-  public actualDeptime: Date;
-  public actualArrtime: Date;
-  public status;
-  public id: number;
-  public dep: string;
-  public arr: string;
-  public deptime: Date;
-  public arrtime: Date;
-  public count: number;
+  aircraft: string;
+   actualDeptime: Date;
+   actualArrtime: Date;
+   status;
+   id: number;
+   dep: string;
+   arr: string;
+   deptime: Date;
+   arrtime: Date;
+   count: number;
   constructor(id: string, dep: string, arr: string, deptime: string, arrtime: string, count: string) {
     this.id = Number(id);
     this.dep = dep;
