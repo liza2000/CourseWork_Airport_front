@@ -21,20 +21,20 @@ export class RegistrationComponent implements OnInit {
   }
   setPassport(v: string) {
     this.passenger = new Passenger();
-    this.passenger.passport = v;
+    this.passenger.passport_no = v;
     this.startReg = true;
     this.regService.getPassenger(v, this.flight).subscribe(data => this.passenger = data as Passenger);
   }
   setTotalWeight(v) {
-    this.passenger.totalWeight = Number(v.replace(',', '.'));
-    if (this.passenger.totalWeight > this.passenger.maxWeight) {
-      this.overWeight = this.passenger.totalWeight - this.passenger.maxWeight;
+    this.passenger.total_weight = Number(v.replace(',', '.'));
+    if (this.passenger.total_weight > this.passenger.max_weight) {
+      this.overWeight = this.passenger.total_weight - this.passenger.max_weight;
     }
   }
   toRegistrate() {
     this.regService.toRegistrate(this.passenger, this.flight.toString());
-    this.passenger.passport = '';
-    this.passenger.totalWeight = 0;
+    this.passenger.passport_no = '';
+    this.passenger.total_weight = 0;
     this.startReg = false;
     this.overWeight = 0;
   }

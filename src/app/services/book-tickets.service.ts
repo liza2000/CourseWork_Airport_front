@@ -4,6 +4,7 @@ import {Passenger} from '../model/passenger';
 import {Flight} from '../model/flight';
 import {Book} from '../model/book';
 import {Observable} from 'rxjs';
+import {AppComponent} from '../app.component';
 
 @Injectable()
 export class BookTicketsService {
@@ -23,24 +24,24 @@ export class BookTicketsService {
   flight: fl,
   count: cnt
   };
-  return this.httpClient.post('jk', body, {headers: BookTicketsService.getHeaders()});
+  return this.httpClient.post(AppComponent.API_URL + 'flight/booking/', body, {headers: BookTicketsService.getHeaders()});
   }
   getBook(id: string) {
    return this.httpClient.get('bb?id=' + id, {headers: BookTicketsService.getHeaders()});
   }
   changeTicket(p: Passenger, bookID: string) {
     const body = {
-      passport: p.passport,
+      passport: p.passport_no,
       seat: p.seat,
       room: p.waitingRoom,
-      maxweight: p.maxWeight,
+      maxweight: p.max_weight,
       book: bookID
     };
     return this.httpClient.post('mnm', body, {headers: BookTicketsService.getHeaders()});
   }
   deleteTicket(p: Passenger, bookID: string) {
     const body = {
-      passport: p.passport,
+      passport: p.passport_no,
       book: bookID
     };
     return this.httpClient.post('mnm', body, {headers: BookTicketsService.getHeaders()});

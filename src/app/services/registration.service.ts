@@ -18,7 +18,7 @@ export class RegistrationService {
     return this.httpClient.post('jk', {passport: pass, flightID: flgt}, {headers: RegistrationService.getHeaders()});
   }
   toRegistrate(psg: Passenger, flgt: string) {
-    return this.httpClient.post('jk', {passport: psg.passport, totalWeight: psg.totalWeight, flightID: flgt},
+    return this.httpClient.post('jk', {passport: psg.passport_no, totalWeight: psg.total_weight, flightID: flgt},
       {headers: RegistrationService.getHeaders()});
   }
 }

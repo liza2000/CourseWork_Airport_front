@@ -36,19 +36,19 @@ public count;
     this.contactInfo = v;
   }
   setPassport(pass: Passenger, value: string) {
-    pass.passport = value;
+    pass.passport_no = value;
 }
   setName(pass: Passenger, value: string) {
     pass.name = value;
   }
   setSecondName(pass: Passenger, value: string) {
-    pass.secondName = value;
+    pass.second_name = value;
   }
   setThirdName(pass: Passenger, value: string) {
-    pass.thirdName = value;
+    pass.third_name = value;
   }
   setBornDate(pass: Passenger, value: string) {
-    pass.bornDate = new Date(value);
+    pass.birthday = new Date(value);
   }
   setSeat(pass: Passenger, value: string) {
     pass.seat = value;
@@ -57,7 +57,7 @@ public count;
     pass.waitingRoom = value;
   }
   setBaggage(pass: Passenger, value: string) {
-    pass.maxWeight = Number(value);
+    pass.max_weight = Number(value);
   }
 
   changeCount(v: string) {

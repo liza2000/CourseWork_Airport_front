@@ -18,7 +18,7 @@ export class LandService {
     return this.httpClient.post('jk', {passport: pass, flightID: flgt}, {headers: LandService.getHeaders()});
   }
   toLand(psg: Passenger, flgt: string) {
-    return this.httpClient.post('jk', {passport: psg.passport,  flightID: flgt, baggageStatus: psg.baggageStatus},
+    return this.httpClient.post('jk', {passport: psg.passport_no,  flightID: flgt, baggageStatus: psg.status},
       {headers: LandService.getHeaders()});
   }
 }

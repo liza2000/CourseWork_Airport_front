@@ -1,14 +1,14 @@
 <div class="regform container">
 
   <label> Номер паспорта:
-    <input type="text" [ngModel]="passenger.passport"  (change)="passport.checkValidity() && setPassport(passport.value)" #passport  pattern="^[0-9]+$" maxlength="10" minlength="10" >
+    <input type="text" [ngModel]="passenger.passport_no" (change)="passport.checkValidity() && setPassport(passport.value)" #passport pattern="^[0-9]+$" maxlength="10" minlength="10" >
   </label>
   <br/>
   <div *ngIf="passenger&&passenger.hasbaggage">Оплаченный вес багажа, кг:
-    {{passenger.maxWeight}}
+    {{passenger.max_weight}}
  <br/>
   <label>Вес багажа, кг:
-    <input type="text" pattern="^[0-9]*[.,]?[0-9]+$" #total (change)="setTotalWeight(total.value)" [(ngModel)]="passenger.totalWeight">
+    <input type="text" pattern="^[0-9]*[.,]?[0-9]+$" #total (change)="setTotalWeight(total.value)" [(ngModel)]="passenger.total_weight">
   </label>
 
   <br/>

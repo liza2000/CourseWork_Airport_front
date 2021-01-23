@@ -18,18 +18,18 @@ export class LandingComponent implements OnInit {
   }
 
   setBaggageStatus(val) {
-    this.passenger.baggageStatus = val;
+    this.passenger.status = val;
   }
 
   setPassport(v) {
     this.passenger = new Passenger();
-    this.passenger.passport = v;
+    this.passenger.passport_no = v;
     this.landService.getPassenger(v, this.flight).subscribe(data => this.passenger = data as Passenger);
   }
 
   toLand() {
     this.landService.toLand(this.passenger, this.flight.toString());
-    this.passenger.passport = '';
-    this.passenger.baggageStatus = 'null';
+    this.passenger.passport_no = '';
+    this.passenger.status = 'null';
   }
 }

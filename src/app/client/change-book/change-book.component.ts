@@ -31,7 +31,7 @@ book: Book = new Book();
     pass.waitingRoom = value;
   }
   setBaggage(pass: Passenger, value: string) {
-    pass.maxWeight = Number(value);
+    pass.max_weight = Number(value);
   }
   setContact(v) {
     this.contactInfo = v;

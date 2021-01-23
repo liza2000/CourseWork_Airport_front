@@ -9,19 +9,19 @@
     <div class="passengers">
       <div class="passenger" *ngFor="let p of passengers">
         <label> Паспорт:
-          {{p.passport}}
+          {{p.passport_no}}
         </label><br/>
         <label> Фамилия:
-      {{p.secondName}}
+      {{p.second_name}}
         </label><br/>
         <label> Имя:
         {{p.name}}
         </label><br/>
         <label>Отчество:
-          {{p.thirdName}}
+          {{p.third_name}}
         </label><br/>
         <label> Дата рождения:
-          {{p.bornDate.toLocaleDateString()}}
+          {{p.birthday.toLocaleDateString()}}
         </label><br/>
         <span> Место:
           <select #seat (change)="setSeat(p,seat.value)">

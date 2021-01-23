@@ -1,16 +1,16 @@
 export class Passenger {
-  public static p = 0;
-  public waitingRoom = 'middle';
-  public passport: string;
-  public name: string;
-  public secondName: string;
-  public thirdName: string;
-  public bornDate: Date;
-  public seat: string;
-  public maxWeight = 0;
-  public totalWeight: number;
-  public baggageStatus = 'accept';
-  public hasbaggage = true;
+   static p = 0;
+   waitingRoom = 'middle';
+   passport_no: string;
+   name: string;
+   second_name: string;
+   third_name: string;
+   birthday: Date;
+   seat: string;
+   max_weight = 0;
+   total_weight: number;
+   status = 'accept';
+   hasbaggage = true;
   constructor(
   ) {}
 }
