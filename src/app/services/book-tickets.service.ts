@@ -51,4 +51,7 @@ export class BookTicketsService {
   getCountOfBusinessSeats(flight: number) {
     return this.httpClient.post('mnm', {id: flight}, {headers: BookTicketsService.getHeaders()});
   }
+  calculate(id: number, pass: Passenger[]){
+    return this.httpClient.post('mnm', {flight: id, passengers:JSON.stringify(pass)}, {headers: BookTicketsService.getHeaders()});
+  }
 }

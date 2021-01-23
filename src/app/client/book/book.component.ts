@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BetweenComponentsService} from '../../services/betweenComponents.service';
-import {Flight} from '../../model/flight';
 import {Passenger} from '../../model/passenger';
-import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 import {BookTicketsService} from '../../services/book-tickets.service';
 
 @Component({
@@ -74,8 +72,8 @@ public count;
     }
     this.count = cnt;
   }
-  // calculateAmount() {
-  //   this.bookTicketsService.calculate().subscribe(data =>  this.totalAmount = data as number);
-  // }
+  calculateAmount() {
+    this.bookTicketsService.calculate(this.flight, this.passengers).subscribe(data =>  this.totalAmount = data as number);
+  }
 
 }
