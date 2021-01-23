@@ -1,12 +1,13 @@
 export class Aircraft {
-  public company: string;
-  public id: number;
-  public location: string;
-  public aircraftmodel: string;
-  constructor() {
-this.aircraftmodel = 'rt';
-this.company = 'edfd';
-this.id = 4;
-this.location = 'uu';
+   company: string;
+  id: number;
+  location: string;
+  aircraftmodel: string;
+
+  constructor(company: string, id: string, location: string, aircraftmodel: string) {
+    this.company = company;
+    this.id = Number(id);
+    this.location = location;
+    this.aircraftmodel = aircraftmodel;
   }
 }

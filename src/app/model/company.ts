@@ -1,8 +1,9 @@
 export class Company {
-  public type: string;
-  public name: string;
-  constructor() {
-    this.type = 'kl';
-    this.name = 'jkjk';
+  type: string;
+  name: string;
+
+  constructor(type: string, name: string) {
+    this.type = type;
+    this.name = name;
   }
 }
