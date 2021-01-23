@@ -18,7 +18,7 @@ countOfEconomy: number;
 currentBus: number;
 currentEc: number;
 limit: number;
-totalAmount: number;
+totalAmount: number = 0;
 public count;
   constructor(private betweenComponentsService: BetweenComponentsService, private bookTicketsService: BookTicketsService) { }
 

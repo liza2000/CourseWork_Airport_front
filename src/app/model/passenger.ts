@@ -9,7 +9,6 @@ export class Passenger {
   public maxWeight = 0;
   public totalWeight: number;
   public baggageStatus;
-  public hasbaggage = true;
   constructor(
   ) {}
 }
