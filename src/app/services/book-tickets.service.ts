@@ -52,6 +52,6 @@ export class BookTicketsService {
     return this.httpClient.post(AppComponent.API_URL + 'flight/booking/business/', {id: flight}, {headers: BookTicketsService.getHeaders()});
   }
   calculate(id: number, pass: Passenger[]){
-    return this.httpClient.post('mnm', {flight: id, passengers:JSON.stringify(pass)}, {headers: BookTicketsService.getHeaders()});
+    return this.httpClient.post(AppComponent.API_URL + 'flight/booking/price/', {flight: id, passengers:pass}, {headers: BookTicketsService.getHeaders()});
   }
 }

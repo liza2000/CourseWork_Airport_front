@@ -1,6 +1,6 @@
 export class Passenger {
 
-   static p = 0;
+
    waitingRoom = 'middle';
    name: string;
    second_name: string;
