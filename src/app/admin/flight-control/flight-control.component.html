@@ -29,7 +29,7 @@
     </select>
   </label><br/>
   <label> <button (click)="addNew(newAircraft.value, newFlightDepDate.value, newFlightDepTime.value,
-  newFlightArrDate.value, newFlightArrTime.value, newFlightDepTime.value, newFlightDep.value, newFlightArr.value)">Добавить</button></label>
+  newFlightArrDate.value, newFlightArrTime.value, newFlightDep.value, newFlightArr.value)">Добавить</button></label>
 </div>
 
 <table *ngIf="!addFormOpened">
@@ -81,18 +81,15 @@
     </label>
     </span></td>
     <td><label>
-      <select #dep [value]="flight.dep" (change)="setDep(dep.value,flight)">
+      <input #dep list="loc" [value]="flight.dep" type="text" (change)="setDep(dep.value,flight)"/>
+        <datalist id="loc">
         <option *ngFor="let punct of puncts">
           {{punct}}
         </option>
-      </select>
+        </datalist>
     </label></td>
     <td><label>
-      <select #arr [value]="flight.arr" (change)="setArr(arr.value,flight)">
-        <option *ngFor="let punct of puncts">
-          {{punct}}
-        </option>
-      </select>
+      <input list="loc" type="text" #arr [value]="flight.arr" (change)="setArr(arr.value,flight)">
     </label></td>
     <td>
       <label>

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BetweenComponentsService} from '../../services/betweenComponents.service';
-import {Flight} from '../../model/flight';
 import {Passenger} from '../../model/passenger';
-import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 import {BookTicketsService} from '../../services/book-tickets.service';
 
 @Component({
@@ -16,8 +14,11 @@ public passengers: Passenger[] = [] ;
 public contactInfo: string;
 public bookKey;
 countOfBusiness: number;
+countOfEconomy: number;
+currentBus: number;
+currentEc: number;
 limit: number;
-totalAmount: number;
+totalAmount: number = 0;
 public count;
   constructor(private betweenComponentsService: BetweenComponentsService, private bookTicketsService: BookTicketsService) { }
 
@@ -25,11 +26,14 @@ public count;
     this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
     this.betweenComponentsService.currentCount.subscribe(message => this.limit = message);
     this.bookTicketsService.getCountOfBusinessSeats(this.flight).subscribe(data => this.countOfBusiness = data as number);
+    this.countOfEconomy = this.limit - this.countOfBusiness;
+    this.currentBus = this.countOfBusiness;
+    this.currentEc =  this.countOfEconomy;
     this.passengers.push(new Passenger());
     this.count = 1;
   }
   sendBook() {
-   this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight, this.count)
+   this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight)
      .subscribe(data => this.bookKey = data as number);
   }
   setContact(v) {
@@ -52,6 +56,7 @@ public count;
   }
   setSeat(pass: Passenger, value: string) {
     pass.seat = value;
+    this.changeSeat();
   }
   setRoom(pass: Passenger, value: string) {
     pass.waitingRoom = value;
@@ -73,9 +78,18 @@ public count;
       }
     }
     this.count = cnt;
+    this.changeSeat();
   }
-  // calculateAmount() {
-  //   this.bookTicketsService.calculate().subscribe(data =>  this.totalAmount = data as number);
-  // }
+  calculateAmount() {
+    this.bookTicketsService.calculate(this.flight, this.passengers).subscribe(data =>  this.totalAmount = data as number);
+  }
+  changeSeat(){
+    let ec = 0;
+    let bus = 0;
+    this.passengers.forEach(p => {if (p.seat=='economy') ec++;});
+    this.passengers.forEach(p => {if (p.seat=='business') bus++;});
+    this.currentEc = this.countOfEconomy - ec;
+    this.currentBus = this.countOfBusiness - bus;
+  }
 
 }

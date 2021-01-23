@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Employer} from '../../model/employer';
 import {BetweenComponentsService} from '../../services/betweenComponents.service';
 import {AdminService} from '../../services/admin.service';
+import {Aircraft} from '../../model/aircraft';
 
 @Component({
   selector: 'app-employee-control',
@@ -11,15 +12,21 @@ import {AdminService} from '../../services/admin.service';
 export class EmployeeControlComponent implements OnInit {
   addFormOpened = false;
   sheduleOpened = false;
-    employer: Employer = new Employer();
-    employer1: Employer = new Employer();
+    // employer: Employer = new Employer();
+    // employer1: Employer = new Employer();
     employeers: Employer[] = [];
   constructor( private service: BetweenComponentsService, private adminService: AdminService) { }
 
   ngOnInit() {
-    this.employeers.push(this.employer);
-    this.employeers.push(this.employer1);
-    this.adminService.getEmployers().subscribe(data => this.employeers = data as Employer[],
+    // this.employeers.push(this.employer);
+    // this.employeers.push(this.employer1);
+    this.adminService.getEmployers().subscribe((data: Response) => {
+        const res = JSON.parse(JSON.stringify(data));
+        for (let i in res ) {
+          let employee = new Employer( res[i]['passport'],res[i]['name'], res[i]['surname'], res[i]['pathronymic'], res[i]['company'], res[i]['position']);
+          this.employeers.push(employee);
+        }
+      },
         error => alert('Ошибка при загрузке сотрудников'));
   }
   openSchedule(emp: Employer) {

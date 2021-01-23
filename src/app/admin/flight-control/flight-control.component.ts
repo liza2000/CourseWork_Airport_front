@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Flight} from '../../model/flight';
 import {AdminService} from '../../services/admin.service';
+import {Flight} from '../../model/flight';
 
 @Component({
   selector: 'app-flight-control',
@@ -9,7 +9,7 @@ import {AdminService} from '../../services/admin.service';
 })
 export class FlightControlComponent implements OnInit {
   addFormOpened = false;
-  // public flight: Flight = new Flight();
+//   public flight: Flight = new Flight('1','dd','dd','2020-12-08T22:00:00','2020-12-08T22:00:00','3','2020-12-08T22:00:00','2020-12-08T22:00:00','dd','sd');
   // public flight1: Flight = new Flight();
   public allflights: Flight[] = [];
   public puncts: string[];
@@ -18,7 +18,16 @@ export class FlightControlComponent implements OnInit {
   ngOnInit() {
     this.adminService.getPuncts().subscribe(data => (data as string[]).forEach( p => this.puncts.push(p)),
         error => alert('ошибка при загрузке пунктов'));
-    this.adminService.getFlights().subscribe(data => this.allflights = data as Flight[], error => alert('Ошибка при загрузке полётов'));
+    this.adminService.getFlights().subscribe((data: Response) => {
+      const res = JSON.parse(JSON.stringify(data));
+      for (let i in res ) {
+        console.log(res[i]['arr']);
+        let flight = new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
+          res[i]['deptime'],res[i]['arrtime'], res[i]['count'],res[i]['actualArrtime'],res[i]['actualDeptime'],res[i]['aircraft'],res[i]['status']);
+        console.log(flight);
+        this.allflights.push(flight);
+      }
+    } , error => alert('Ошибка при загрузке полётов'));
    // this.allflights.push(this.flight);
   }
   setTime(time: string, date: Date) {
@@ -26,7 +35,10 @@ export class FlightControlComponent implements OnInit {
     //alert(this.flight.deptime);
   }
   setDate(date: string, flightDate: Date) {
-    flightDate.setFullYear(new Date(date).getFullYear());
+   let d = new Date(date);
+    flightDate.setFullYear(d.getFullYear());
+    flightDate.setMonth(d.getMonth());
+    flightDate.setDate(d.getDate());
   }
   setArr(arr: string, flight: Flight) {
     flight.arr = arr;

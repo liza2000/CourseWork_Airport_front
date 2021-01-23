@@ -5,13 +5,14 @@ export class Employer {
   pathronymic: string;
   company: string;
   position: string;
-  constructor() {
-    this.passport =  1;
-    this.name = 'k';
-    this.surname = 'j';
-    this.pathronymic = 'hj';
-    this.company = 'k';
-    this.position = 'fs';
-  }
 
+
+  constructor(passport: string, name: string, surname: string, pathronymic: string, company: string, position: string) {
+    this.passport = Number(passport);
+    this.name = name;
+    this.surname = surname;
+    this.pathronymic = pathronymic;
+    this.company = company;
+    this.position = position;
+  }
 }

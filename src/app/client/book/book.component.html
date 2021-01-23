@@ -1,7 +1,7 @@
 <div class="container">
   Полёт № {{flight}}<br/>
-  Количество билетов класса "Бизнес": {{countOfBusiness}}<br/>
-  Количество билетов класса "Эконом": {{limit - countOfBusiness}}<br/>
+  Количество билетов класса "Бизнес": {{currentBus}}<br/>
+  Количество билетов класса "Эконом": {{currentEc}}<br/>
   <div class="forlabel">
   <label> Количество пассажиров
   <input type="number" min="1" max="{{limit}}" #cnt [value]="count" (change)=" cnt.checkValidity()&&changeCount(cnt.value)">
@@ -28,8 +28,9 @@
   </label><br/>
   <label> Место:
     <select #seat (change)="setSeat(p,seat.value)">
-      <option>эконом</option>
-      <option>бизнес</option>
+      <option selected>Не выбрано</option>
+      <option [disabled]="currentEc==0">economy</option>
+      <option [disabled]="currentBus==0">business</option>
     </select>
   </label><br/>
   <label >Вес багажа
@@ -37,9 +38,9 @@
   </label><br/>
   <label>Комната ожидания
     <select  #room (change)="setRoom(p,room.value)">
-      <option selected>Middle</option>
-      <option>Комфорт</option>
-      <option>Комфорт+</option>
+      <option selected>middle</option>
+      <option>comfort</option>
+      <option>comfort+</option>
     </select>
     <br/><br/>
   </label><br/>
@@ -52,6 +53,6 @@
   </label><br/>
       <button (click)="calculateAmount()">Расчитать цену</button>
       <button type="submit" (click)="sendBook()">Забронировать</button></div>
-  </form>
-
+  </form><br/>
+Цена: {{totalAmount}}
 </div>

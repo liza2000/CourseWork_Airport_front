@@ -28,8 +28,10 @@ export class LandingComponent implements OnInit {
   }
 
   toLand() {
-    this.landService.toLand(this.passenger, this.flight.toString());
+
+  if (this.passenger.status!='null')  this.landService.toLand(this.passenger, this.flight.toString());
     this.passenger.passport_no = '';
     this.passenger.status = 'null';
+
   }
 }

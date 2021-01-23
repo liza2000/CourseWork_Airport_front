@@ -25,13 +25,14 @@ export class MainComponent implements OnInit {
   }
 
   searchFlights(dep: string, arr: string, date: string, count: string) {
+    this.allflights = new Array<Flight>();
   this.flightService.getFlights(dep, arr, new Date(date), Number(count))
   .subscribe((data: Response) => {
     const res = JSON.parse(JSON.stringify(data));
     for (let i in res ) {
       console.log(res[i]['arr']);
       let flight = new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
-        res[i]['deptime'],res[i]['arrtime'], res[i]['count']);
+        res[i]['deptime'],res[i]['arrtime'], res[i]['count'],res[i]['actualArrtime'],res[i]['actualDeptime'],res[i]['aircraft'],res[i]['status']);
       console.log(flight);
       this.allflights.push(flight);
     }

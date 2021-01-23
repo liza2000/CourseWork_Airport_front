@@ -1,9 +1,9 @@
 <button (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
 
 <div *ngIf="addFormOpened" class="container addForm">
-  <label>Название
+  <label>Название<br/>
     <input type="text" #newAirName/>
-  </label>
+  </label><br/>
   <label>Модель<br/>
     <input type="text" #newAircraftModel/>
   </label><br/>

@@ -17,12 +17,11 @@ export class BookTicketsService {
   }
   constructor(public httpClient: HttpClient) { }
 
-  sendBook(contactInfo: string, pass: Passenger[], fl: number, cnt: number) {
+  sendBook(contactInfo: string, pass: Passenger[], fl: number) {
   const body = {
   contact: contactInfo,
   passengers: pass,
-  flight: fl,
-  count: cnt
+  flight: fl
   };
   return this.httpClient.post(AppComponent.API_URL + 'flight/booking/', body, {headers: BookTicketsService.getHeaders()});
   }
@@ -51,5 +50,8 @@ export class BookTicketsService {
   }
   getCountOfBusinessSeats(flight: number) {
     return this.httpClient.post('mnm', {id: flight}, {headers: BookTicketsService.getHeaders()});
+  }
+  calculate(id: number, pass: Passenger[]){
+    return this.httpClient.post('mnm', {flight: id, passengers:JSON.stringify(pass)}, {headers: BookTicketsService.getHeaders()});
   }
 }

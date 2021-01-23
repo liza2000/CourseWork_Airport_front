@@ -3,6 +3,7 @@ import {WorkAtTime} from '../../model/work-at-time';
 import {BetweenComponentsService} from '../../services/betweenComponents.service';
 import {Employer} from '../../model/employer';
 import {AdminService} from '../../services/admin.service';
+import {Flight} from '../../model/flight';
 
 @Component({
   selector: 'app-lend-shedule-control',
@@ -12,16 +13,22 @@ import {AdminService} from '../../services/admin.service';
 export class LendSheduleControlComponent implements OnInit {
   employer: Employer;
   addFormOpened = false;
-  public work: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-01-11T11:00:00'), new Date('2021-01-11T23:00:00'));
-  public work1: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-12-08T21:00:00'), new Date('2020-12-08T22:00:00'));
+  // public work: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-01-11T11:00:00'), new Date('2021-01-11T23:00:00'));
+  // public work1: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-12-08T21:00:00'), new Date('2020-12-08T22:00:00'));
   public schedule: WorkAtTime[] = [];
   constructor( private service: BetweenComponentsService, private adminService: AdminService) { }
 
   ngOnInit() {
-    this.schedule.push(this.work);
-    this.schedule.push(this.work1);
+    // this.schedule.push(this.work);
+    // this.schedule.push(this.work1);
     this.service.currentEmployer.subscribe(message => this.employer = message);
-    this.adminService.getSchedule(this.employer.passport).subscribe(data => this.schedule = data as WorkAtTime[]);
+    this.adminService.getSchedule(this.employer.passport).subscribe((data: Response) => {
+      const res = JSON.parse(JSON.stringify(data));
+      for (let i in res ) {
+        let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);
+        this.schedule.push(work);
+      }
+    } );
   }
   public delete(work: WorkAtTime) {
     this.adminService.deleteWork(work.flight, this.employer.passport);
@@ -33,13 +40,19 @@ export class LendSheduleControlComponent implements OnInit {
     work.gate = Number(gate);
   }
   public setStartDate(date: string, work: WorkAtTime) {
-    work.start.setFullYear(new Date(date).getFullYear());
+    let d = new Date(date);
+    work.start.setFullYear(d.getFullYear());
+    work.start.setMonth(d.getMonth());
+    work.start.setDate(d.getDate());
   }
   public setStartTime(time: string, work: WorkAtTime) {
     work.start.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
   }
   public setFinishDate(date: string, work: WorkAtTime) {
-    work.finish.setFullYear(new Date(date).getFullYear());
+    let d = new Date(date);
+    work.finish.setFullYear(d.getFullYear());
+    work.finish.setMonth(d.getMonth());
+    work.finish.setDate(d.getDate());
   }
   public setFinishTime(time: string, work: WorkAtTime) {
     work.finish.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
