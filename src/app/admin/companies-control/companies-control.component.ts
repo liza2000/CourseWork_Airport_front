@@ -30,7 +30,7 @@ public companies: Company[] = [];
     this.adminService.addNewCompany(name, type);
   }
   delete(comp: Company) {
-    this.adminService.deleteCompany(comp);
+    this.adminService.deleteCompany(comp).subscribe(data => this.companies = this.companies.filter(c => c.name!=comp.name));
   }
 
 }

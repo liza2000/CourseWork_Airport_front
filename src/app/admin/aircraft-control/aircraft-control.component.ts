@@ -35,7 +35,7 @@ export class AircraftControlComponent implements OnInit {
     aircraft.company = company;
   }
   delete(id) {
-    this.adminService.deleteAircraft(id);
+    this.adminService.deleteAircraft(id).subscribe(data => this.aircrafts = this.aircrafts.filter(aircraft => aircraft.id!=id));
   }
   change(aircraft: Aircraft) {
     this.adminService.changeAircraft(aircraft);

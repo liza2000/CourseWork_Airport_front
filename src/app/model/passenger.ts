@@ -1,6 +1,5 @@
 export class Passenger {
 
-
    waitingRoom = 'middle';
    name: string;
    second_name: string;
@@ -10,7 +9,6 @@ export class Passenger {
    max_weight = 0;
    total_weight: number;
    status = 'accept';
-   hasbaggage = true;
   passport_no: string;
 
   constructor(

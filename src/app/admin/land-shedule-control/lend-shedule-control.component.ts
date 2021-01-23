@@ -31,7 +31,7 @@ export class LendSheduleControlComponent implements OnInit {
     } );
   }
   public delete(work: WorkAtTime) {
-    this.adminService.deleteWork(work.flight, this.employer.passport);
+    this.adminService.deleteWork(work.flight, this.employer.passport).subscribe(data => this.schedule = this.schedule.filter(w => w.flight!=work.flight));
   }
   public change(work: WorkAtTime) {
     this.adminService.changeWork(work, this.employer.passport);

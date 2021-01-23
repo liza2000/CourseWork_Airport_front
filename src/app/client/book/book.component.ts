@@ -42,7 +42,8 @@ public count;
 
   sendBook() {
    this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight)
-     .subscribe(data => this.bookKey = data as number);
+     .subscribe(data => {this.bookKey = data as number; alert('Бронь успешно добавлена')},
+         error => {alert('Ошибка при бронировании')});
   }
   setContact(v) {
     this.contactInfo = v;

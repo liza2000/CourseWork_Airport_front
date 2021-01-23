@@ -55,7 +55,7 @@ export class FlightControlComponent implements OnInit {
     this.adminService.addNewFlight(aircraft, scheduleDep, scheduleArr, dep, arr);
   }
   delete(id: number) {
-    this.adminService.deleteFlight(id);
+    this.adminService.deleteFlight(id).subscribe(data => this.allflights = this.allflights.filter(f => f.id!=id));
   }
   change(flight: Flight) {
     this.adminService.changeFlight(flight);
