@@ -9,7 +9,7 @@ import {ScheduleService} from '../services/schedule.service';
   styleUrls: ['./employer.component.css']
 })
 export class EmployerComponent implements OnInit {
-  // public work: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-01-11T11:00:00'), new Date('2021-01-11T23:00:00'));
+   public work: WorkAtTime = new WorkAtTime('','','','');
   // public work1: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-12-08T21:00:00'), new Date('2020-12-08T22:00:00'));
   public schedule: WorkAtTime[] = [];
   public isReady = false;
@@ -18,7 +18,7 @@ export class EmployerComponent implements OnInit {
               private scheduleService: ScheduleService) { }
   ngOnInit() {
     if (localStorage.getItem('CurrentEmpl') == null) { this.router.navigate(['/main']); }
-    this.isReg = localStorage.getItem('PositionOfCurrentEmpl') === 'reception';
+    this.isReg = localStorage.getItem('PositionOfCurrentEmpl') === 'reception'; // todo если чекаете сотрудника регистрации тут должно быть true
     // this.schedule.push(this.work);
     // this.schedule.push(this.work1);
     this.scheduleService.getSchedule(localStorage.getItem('CurrentEmpl')).subscribe((data: Response) => {
@@ -27,8 +27,7 @@ export class EmployerComponent implements OnInit {
           let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);
           this.schedule.push(work);
         }
-      },
-        error => alert('Ошибка при получении расписания'));
+      },);
   }
  checkActualWork(work: WorkAtTime) {
     const date: Date = new Date();

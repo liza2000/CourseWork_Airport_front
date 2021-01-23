@@ -28,7 +28,7 @@ export class LandingComponent implements OnInit {
   }
 
   toLand() {
-    this.landService.toLand(this.passenger, this.flight.toString());
+  if (this.passenger.baggageStatus!='null')  this.landService.toLand(this.passenger, this.flight.toString());
     this.passenger.passport = '';
     this.passenger.baggageStatus = 'null';
   }

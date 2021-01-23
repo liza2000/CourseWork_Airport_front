@@ -20,7 +20,7 @@ export class RegistrationComponent implements OnInit {
     this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
   }
   setPassport(v: string) {
-    this.passenger = new Passenger();
+    this.passenger = new Passenger(); // todo это удалить когда пассажир начнет приходить с сервера
     this.passenger.passport = v;
     this.startReg = true;
     this.regService.getPassenger(v, this.flight).subscribe(data => this.passenger = data as Passenger);

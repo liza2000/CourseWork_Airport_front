@@ -4,7 +4,7 @@
     <input type="text" [ngModel]="passenger.passport"  (change)="passport.checkValidity() && setPassport(passport.value)" #passport  pattern="^[0-9]+$" maxlength="10" minlength="10" >
   </label>
   <br/>
-  <div *ngIf="passenger&&passenger.hasbaggage">Оплаченный вес багажа, кг:
+  <div *ngIf="passenger&&passenger.baggageStatus!='null'">Оплаченный вес багажа, кг:
     {{passenger.maxWeight}}
  <br/>
   <label>Вес багажа, кг:
@@ -17,7 +17,7 @@
     </span>
    <br/>
   </div>
-  <span *ngIf="passenger&&!passenger.hasbaggage">Багажа нет</span>
+  <span *ngIf="passenger&&passenger.baggageStatus=='null'">Багажа нет</span>
 
   <button (click)="toRegistrate()">Зарегистрировать</button>
 </div>

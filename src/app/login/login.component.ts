@@ -16,9 +16,8 @@ export class LoginComponent implements OnInit {
   }
   login(id) {
     let pos: string;
-    this.schedService.getPosition(id).subscribe(data => pos = data as string,
-        error => {alert('Такого сотрудника не существует'); return; });
-    if (pos === 'null') { alert('Такого сотрудника не существует');  return; }
+    this.schedService.getPosition(id).subscribe(data => pos = data as string);
+    if (pos === 'null' || pos == null) { alert('Такого сотрудника не существует');  return; } //todo закомменчивайте эту строку если тестите сотрудников
     localStorage.setItem('CurrentEmpl', id);
     localStorage.setItem('PositionOfCurrentEmpl', pos);
     this.router.navigate(['/employer']);
