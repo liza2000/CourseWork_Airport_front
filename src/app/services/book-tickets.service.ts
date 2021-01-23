@@ -16,12 +16,11 @@ export class BookTicketsService {
   }
   constructor(public httpClient: HttpClient) { }
 
-  sendBook(contactInfo: string, pass: Passenger[], fl: number, cnt: number) {
+  sendBook(contactInfo: string, pass: Passenger[], fl: number) {
   const body = {
   contact: contactInfo,
   passengers: pass,
-  flight: fl,
-  count: cnt
+  flight: fl
   };
   return this.httpClient.post('jk', body, {headers: BookTicketsService.getHeaders()});
   }
