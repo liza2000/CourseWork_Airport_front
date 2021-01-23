@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {BetweenComponentsService} from '../../services/betweenComponents.service';
 import {Passenger} from '../../model/passenger';
 import {BookTicketsService} from '../../services/book-tickets.service';
@@ -8,7 +8,7 @@ import {BookTicketsService} from '../../services/book-tickets.service';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
-export class BookComponent implements OnInit {
+export class BookComponent implements OnInit, AfterViewInit {
 public flight: number;
 public passengers: Passenger[] = [] ;
 public contactInfo: string;
@@ -25,13 +25,21 @@ public count;
   ngOnInit() {
     this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
     this.betweenComponentsService.currentCount.subscribe(message => this.limit = message);
-    this.bookTicketsService.getCountOfBusinessSeats(this.flight).subscribe(data => this.countOfBusiness = data as number);
-    this.countOfEconomy = this.limit - this.countOfBusiness;
-    this.currentBus = this.countOfBusiness;
-    this.currentEc =  this.countOfEconomy;
     this.passengers.push(new Passenger());
     this.count = 1;
   }
+
+  ngAfterViewInit(): void {
+    this.bookTicketsService.getCountOfBusinessSeats(this.flight).subscribe(data => {
+        this.countOfBusiness = JSON.parse(JSON.stringify(data))['seats'] as number;
+        console.log(this.countOfBusiness);
+      this.currentBus = this.countOfBusiness;
+      this.countOfEconomy = this.limit - this.countOfBusiness;
+      this.currentEc =  this.countOfEconomy;
+      }
+    );
+  }
+
   sendBook() {
    this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight)
      .subscribe(data => this.bookKey = data as number);
