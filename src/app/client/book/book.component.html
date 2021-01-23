@@ -29,8 +29,8 @@
   <label> Место:
     <select #seat (change)="setSeat(p,seat.value)">
       <option selected>Не выбрано</option>
-      <option [disabled]="currentEc==0">эконом</option>
-      <option [disabled]="currentBus==0">бизнес</option>
+      <option [disabled]="currentEc==0">economy</option>
+      <option [disabled]="currentBus==0">business</option>
     </select>
   </label><br/>
   <label >Вес багажа
@@ -38,9 +38,9 @@
   </label><br/>
   <label>Комната ожидания
     <select  #room (change)="setRoom(p,room.value)">
-      <option selected>Middle</option>
-      <option>Комфорт</option>
-      <option>Комфорт+</option>
+      <option selected>middle</option>
+      <option>comfort</option>
+      <option>comfort+</option>
     </select>
     <br/><br/>
   </label><br/>

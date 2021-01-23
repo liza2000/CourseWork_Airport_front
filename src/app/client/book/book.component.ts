@@ -86,8 +86,8 @@ public count;
   changeSeat(){
     let ec = 0;
     let bus = 0;
-    this.passengers.forEach(p => {if (p.seat=='эконом') ec++;});
-    this.passengers.forEach(p => {if (p.seat=='бизнес') bus++;});
+    this.passengers.forEach(p => {if (p.seat=='economy') ec++;});
+    this.passengers.forEach(p => {if (p.seat=='business') bus++;});
     this.currentEc = this.countOfEconomy - ec;
     this.currentBus = this.countOfBusiness - bus;
   }
