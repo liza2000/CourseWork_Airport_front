@@ -40,13 +40,19 @@ export class LendSheduleControlComponent implements OnInit {
     work.gate = Number(gate);
   }
   public setStartDate(date: string, work: WorkAtTime) {
-    work.start.setFullYear(new Date(date).getFullYear());
+    let d = new Date(date);
+    work.start.setFullYear(d.getFullYear());
+    work.start.setMonth(d.getMonth());
+    work.start.setDate(d.getDate());
   }
   public setStartTime(time: string, work: WorkAtTime) {
     work.start.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
   }
   public setFinishDate(date: string, work: WorkAtTime) {
-    work.finish.setFullYear(new Date(date).getFullYear());
+    let d = new Date(date);
+    work.finish.setFullYear(d.getFullYear());
+    work.finish.setMonth(d.getMonth());
+    work.finish.setDate(d.getDate());
   }
   public setFinishTime(time: string, work: WorkAtTime) {
     work.finish.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));

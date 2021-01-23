@@ -9,7 +9,7 @@ import {Flight} from '../../model/flight';
 })
 export class FlightControlComponent implements OnInit {
   addFormOpened = false;
-  // public flight: Flight = new Flight();
+//   public flight: Flight = new Flight('1','dd','dd','2020-12-08T22:00:00','2020-12-08T22:00:00','3','2020-12-08T22:00:00','2020-12-08T22:00:00','dd','sd');
   // public flight1: Flight = new Flight();
   public allflights: Flight[] = [];
   public puncts: string[];
@@ -35,7 +35,10 @@ export class FlightControlComponent implements OnInit {
     //alert(this.flight.deptime);
   }
   setDate(date: string, flightDate: Date) {
-    flightDate.setFullYear(new Date(date).getFullYear());
+   let d = new Date(date);
+    flightDate.setFullYear(d.getFullYear());
+    flightDate.setMonth(d.getMonth());
+    flightDate.setDate(d.getDate());
   }
   setArr(arr: string, flight: Flight) {
     flight.arr = arr;
