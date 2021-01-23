@@ -20,10 +20,16 @@ export class RegistrationComponent implements OnInit {
     this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
   }
   setPassport(v: string) {
-    this.passenger = new Passenger(); // todo это удалить когда пассажир начнет приходить с сервера
+    this.passenger = new Passenger();
     this.passenger.passport_no = v;
     this.startReg = true;
-    this.regService.getPassenger(v, this.flight).subscribe(data => this.passenger = data as Passenger);
+    this.regService.getPassenger(v, this.flight).subscribe(
+      (data:Response) => {
+      const res = JSON.parse(JSON.stringify(data));
+      this.passenger.passport_no = res['passport_no'];
+      this.passenger.max_weight = res['max_weight'];
+      this.passenger.status = res['status'];
+    } );
   }
   setTotalWeight(v) {
     this.passenger.total_weight = Number(v.replace(',', '.'));
