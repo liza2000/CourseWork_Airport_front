@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
         return;
       } //todo закомменчивайте эту строку если тестите сотрудников
       localStorage.setItem('CurrentEmpl', id);
-      localStorage.setItem('PsitoionOfCurrentEmpl', pos);
+      localStorage.setItem('PositionOfCurrentEmpl', pos);
       this.router.navigate(['/employer']);
     })
   }
