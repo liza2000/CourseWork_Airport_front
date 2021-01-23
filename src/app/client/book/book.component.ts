@@ -14,6 +14,9 @@ public passengers: Passenger[] = [] ;
 public contactInfo: string;
 public bookKey;
 countOfBusiness: number;
+countOfEconomy: number;
+currentBus: number;
+currentEc: number;
 limit: number;
 totalAmount: number;
 public count;
@@ -23,6 +26,9 @@ public count;
     this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
     this.betweenComponentsService.currentCount.subscribe(message => this.limit = message);
     this.bookTicketsService.getCountOfBusinessSeats(this.flight).subscribe(data => this.countOfBusiness = data as number);
+    this.countOfEconomy = this.limit - this.countOfBusiness;
+    this.currentBus = this.countOfBusiness;
+    this.currentEc =  this.countOfEconomy;
     this.passengers.push(new Passenger());
     this.count = 1;
   }
@@ -50,6 +56,7 @@ public count;
   }
   setSeat(pass: Passenger, value: string) {
     pass.seat = value;
+    this.changeSeat();
   }
   setRoom(pass: Passenger, value: string) {
     pass.waitingRoom = value;
@@ -71,9 +78,18 @@ public count;
       }
     }
     this.count = cnt;
+    this.changeSeat();
   }
   calculateAmount() {
     this.bookTicketsService.calculate(this.flight, this.passengers).subscribe(data =>  this.totalAmount = data as number);
+  }
+  changeSeat(){
+    let ec = 0;
+    let bus = 0;
+    this.passengers.forEach(p => {if (p.seat=='эконом') ec++;});
+    this.passengers.forEach(p => {if (p.seat=='бизнес') bus++;});
+    this.currentEc = this.countOfEconomy - ec;
+    this.currentBus = this.countOfBusiness - bus;
   }
 
 }
