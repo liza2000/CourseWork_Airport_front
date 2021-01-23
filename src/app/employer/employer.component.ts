@@ -21,7 +21,13 @@ export class EmployerComponent implements OnInit {
     this.isReg = localStorage.getItem('PositionOfCurrentEmpl') === 'reception';
     // this.schedule.push(this.work);
     // this.schedule.push(this.work1);
-    this.scheduleService.getSchedule(localStorage.getItem('CurrentEmpl')).subscribe(data => this.schedule = data as WorkAtTime[],
+    this.scheduleService.getSchedule(localStorage.getItem('CurrentEmpl')).subscribe((data: Response) => {
+        const res = JSON.parse(JSON.stringify(data));
+        for (let i in res ) {
+          let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);
+          this.schedule.push(work);
+        }
+      },
         error => alert('Ошибка при получении расписания'));
   }
  checkActualWork(work: WorkAtTime) {
