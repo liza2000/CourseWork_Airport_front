@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Passenger} from '../model/passenger';
+import {AppComponent} from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,9 @@ export class ScheduleService {
   }
   constructor(public httpClient: HttpClient) {}
   getSchedule(pass: string) {
-    return this.httpClient.post('jk', {passport: pass}, {headers: ScheduleService.getHeaders()});
+    return this.httpClient.post(AppComponent.API_URL + 'auth/schedule/', {passport: pass}, {headers: ScheduleService.getHeaders()});
   }
   getPosition(id: string) {
-    return this.httpClient.post('jk', {passport: id}, {headers: ScheduleService.getHeaders()});
+    return this.httpClient.post(AppComponent.API_URL + 'auth/', {passport: id}, {headers: ScheduleService.getHeaders()});
   }
 }
