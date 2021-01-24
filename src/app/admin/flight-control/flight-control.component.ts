@@ -21,10 +21,8 @@ export class FlightControlComponent implements OnInit {
     this.adminService.getFlights().subscribe((data: Response) => {
       const res = JSON.parse(JSON.stringify(data));
       for (let i in res ) {
-        console.log(res[i]['arr']);
         let flight = new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
           res[i]['deptime'],res[i]['arrtime'], res[i]['count'],res[i]['actualArrtime'],res[i]['actualDeptime'],res[i]['aircraft'],res[i]['status']);
-        console.log(flight);
         this.allflights.push(flight);
       }
     } , error => alert('Ошибка при загрузке полётов'));
