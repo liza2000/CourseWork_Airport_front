@@ -90,7 +90,7 @@
     </label></td>
     <td>
       <label>
-        <select [value]="flight.status">
+        <select [value]="flight.status" #status (change)="setStatus(status.value, flight)">
           <option>scheduled</option>
           <option>delayed</option>
           <option>departed</option>

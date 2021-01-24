@@ -56,6 +56,9 @@ export class FlightControlComponent implements OnInit {
   setAircraft(aircraft: string, flight: Flight) {
      flight.aircraft = aircraft;
   }
+  setStatus(stat: string, flight: Flight){
+    flight.status = stat;
+  }
   addNew(aircraft: string, depDate: string, depTime: string, arrdate: string, arrtime: string, dep: string, arr: string) {
     const scheduleDep = new Date(depDate + 'T' + depTime);
     const scheduleArr = new Date(arrdate + 'T' + arrtime);
