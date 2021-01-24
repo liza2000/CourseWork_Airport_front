@@ -47,7 +47,9 @@
   </tr>
   <tr *ngFor="let flight of allflights">
     <td>{{flight.id}}</td>
-    <td><label><input type="text" #aircraft (change)="setAircraft(aircraft.value,flight)"/></label></td>
+    <td><label>
+      <input type="text" #aircraft [value]="flight.aircraft" (change)="setAircraft(aircraft.value,flight)"/>
+    </label></td>
     <td><label>
       <input #depdate type="date"  [valueAsDate]="flight.deptime" (change)="setDate(depdate.value, flight.deptime)">
     </label></td>
