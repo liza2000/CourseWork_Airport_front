@@ -27,7 +27,11 @@ public companies: Company[] = [];
     }, error => alert('Ошибка при загрузке компаний'));
   }
   addNewCompany(name: string, type: string) {
-    this.adminService.addNewCompany(name, type);
+    this.adminService.addNewCompany(name, type).subscribe(data => alert('Компания добавлена'),
+      error => {
+      if (error.status == 400) alert('Компания уже существует');
+      }
+    );
   }
   delete(comp: Company) {
     this.adminService.deleteCompany(comp).subscribe(data => this.companies = this.companies.filter(c => !c.name.localeCompare(comp.name)));

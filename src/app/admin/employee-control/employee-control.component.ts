@@ -49,13 +49,17 @@ export class EmployeeControlComponent implements OnInit {
     emp.company = company;
   }
   addNewEmpl(passport: string, name: string, surname: string, pathronymic: string, position: string, company) {
-    this.adminService.addNewEmpl(passport, name, surname, pathronymic, position, company);
+    this.adminService.addNewEmpl(passport, name, surname, pathronymic, position, company).subscribe(data => alert('Сотрудник добавлен'),
+      error => {
+      if (error.status == 404) alert('Компании не существует');
+        if (error.status == 400) alert('Сотрудник с таким паспортом уже есть');
+      });
   }
   delete(passport: string) {
     this.adminService.deleteEmpl(passport).subscribe(data => this.employeers = this.employeers.filter(e => !e.passport.localeCompare(passport)));
   }
   change(empl: Employer) {
-    this.adminService.changeEmployee(empl);
+    this.adminService.changeEmployee(empl).subscribe(data => alert('Данные изменены'));
   }
 
 }

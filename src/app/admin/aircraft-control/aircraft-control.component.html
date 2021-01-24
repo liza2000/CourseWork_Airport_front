@@ -4,17 +4,14 @@
   <label>id<br/>
     <input required="true" type="text" pattern="^[a-zA-Z0-9]+$" maxlength="5" minlength="5" #newId/>
   </label><br/>
-  <label>Название<br/>
-    <input required="true" type="text" #newAirName/>
-  </label><br/>
   <label>Модель<br/>
     <input required="true"type="text" #newAircraftModel/>
   </label><br/>
   <label>Компания<br/>
     <input required="true" type="text" #newAircraftCompany/>
   </label><br/>
- <label> <button (click)="newId.checkValidity()&&newAirName.checkValidity()&&newAircraftModel.checkValidity()&&newAircraftCompany.checkValidity()&&
- addNew(newId.value,newAirName.value, newAircraftCompany.value, newAircraftModel.value)">Добавить</button></label>
+ <label> <button (click)="newId.checkValidity()&&newAircraftModel.checkValidity()&&newAircraftCompany.checkValidity()&&
+ addNew(newId.value, newAircraftCompany.value, newAircraftModel.value)">Добавить</button></label>
 </div>
 <table *ngIf="!addFormOpened">
   <tr>

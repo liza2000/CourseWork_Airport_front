@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Aircraft} from '../../model/aircraft';
-import {Employer} from '../../model/employer';
 import {AdminService} from '../../services/admin.service';
-import {WorkAtTime} from '../../model/work-at-time';
 
 @Component({
   selector: 'app-aircraft-control',
@@ -38,10 +36,17 @@ export class AircraftControlComponent implements OnInit {
     this.adminService.deleteAircraft(id).subscribe(data => this.aircrafts = this.aircrafts.filter(aircraft => !aircraft.id.localeCompare(id)));
   }
   change(aircraft: Aircraft) {
-    this.adminService.changeAircraft(aircraft);
+    this.adminService.changeAircraft(aircraft).subscribe(data => alert('Самолёт изменён'), err => {
+      alert('Не удалось изменить')
+    });
   }
-  addNew(id: string, name: string, company: string, model: string) {
-    this.adminService.addNewAircraft(id, name, company, model);
+  addNew(id: string, company: string, model: string) {
+    this.adminService.addNewAircraft(id, company, model).subscribe(data => alert('Самолёт добавлен'), err => {
+      if (err.status==404)
+        alert('Компания не найдена');
+      if (err.status==400)
+        alert('Самолёт уже существует');
+  })
   }
 
 }

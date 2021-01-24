@@ -62,7 +62,11 @@ export class LendSheduleControlComponent implements OnInit {
   addNew(flight: string, startDate: string, startTime: string, finishDate: string, finishTime: string, gate: string) {
     const start = new Date(startDate + 'T' + startTime);
     const finish = new Date(finishDate + 'T' + finishTime);
-    this.adminService.addNewSchedule(this.employer.passport, flight, start, finish, gate);
+    this.adminService.addNewSchedule(this.employer.passport, flight, start, finish, gate).subscribe( data => alert('Смена добавлена'),
+      error => {
+      if (error.status == 404) alert('Полёт не найден');
+        if (error.status == 400) alert('Смена на этот полёт уже существует');
+      });
   }
 
 }
