@@ -29,7 +29,7 @@ export class LandingComponent implements OnInit {
       this.passenger.passport_no = res['passport_no'];
       this.passenger.max_weight = res['max_weight'];
       this.passenger.status = res['status'];
-    } );
+    }, error => alert('Данный пассажир не зарегестрирован на рейс') );
   }
 
   toLand() {

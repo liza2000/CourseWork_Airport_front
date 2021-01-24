@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
       this.passenger.passport_no = res['passport_no'];
       this.passenger.max_weight = res['max_weight'];
       this.passenger.status = res['status'];
-    } );
+    }, error => alert('Пассажир не найден') );
   }
   setTotalWeight(v) {
     this.passenger.total_weight = Number(v.replace(',', '.'));
