@@ -40,8 +40,9 @@ export class AdminService {
   getSchedule(passport: number) {
    return  this.httpClient.get(AppComponent.API_URL  + 'admin/schedule/get/', {headers: AdminService.getHeaders()});
   }
-  addNewAircraft(name: string, mod: string, comp: string) {
+  addNewAircraft(airid: string, name: string, mod: string, comp: string) {
     const body = {
+      id: airid,
       aircraft: name,
       model: mod,
       company: comp

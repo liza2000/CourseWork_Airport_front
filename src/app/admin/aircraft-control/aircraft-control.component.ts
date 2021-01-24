@@ -40,8 +40,8 @@ export class AircraftControlComponent implements OnInit {
   change(aircraft: Aircraft) {
     this.adminService.changeAircraft(aircraft);
   }
-  addNew(name: string, company: string, model: string) {
-    this.adminService.addNewAircraft(name, company, model);
+  addNew(id: string, name: string, company: string, model: string) {
+    this.adminService.addNewAircraft(id, name, company, model);
   }
 
 }

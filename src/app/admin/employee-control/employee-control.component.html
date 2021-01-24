@@ -1,7 +1,7 @@
 <button [hidden]="sheduleOpened" (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
 <div *ngIf="addFormOpened" class="container addForm">
   <label>Паспорт<br/>
-    <input type="text" #newPassport/>
+    <input type="text" pattern="^[0-9]+$" maxlength="10" minlength="10"  #newPassport/>
   </label><br/>
   <label>Имя<br/>
     <input type="text" #newName/>
@@ -18,7 +18,7 @@
   <label>Компания<br/>
     <input type="text" #newCompany/>
   </label><br/>
-  <label> <button (click)="addNewEmpl(newPassport.value,newName.value,newSurname.value, newPathronymic.value, newPosition.value, newCompany.value)">Добавить</button></label>
+  <label> <button (click)="newPassport.checkValidity()&&addNewEmpl(newPassport.value,newName.value,newSurname.value, newPathronymic.value, newPosition.value, newCompany.value)">Добавить</button></label>
 </div>
 <table *ngIf="!addFormOpened" [hidden]="sheduleOpened">
   <tr>
