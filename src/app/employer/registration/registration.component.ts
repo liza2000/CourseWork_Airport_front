@@ -43,6 +43,7 @@ export class RegistrationComponent implements OnInit {
     this.passenger.total_weight = 0;
     this.startReg = false;
     this.overWeight = 0;
+    this.passenger.status = 'null';
   }
 
 
