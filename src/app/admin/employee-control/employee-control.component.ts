@@ -66,4 +66,17 @@ export class EmployeeControlComponent implements OnInit {
     this.errMessage = mes;
     setTimeout(() => {this.errMessage = null; }, 3000);
   }
+  refresh(){
+    this.addFormOpened = !this.addFormOpened;
+    if (this.addFormOpened) return;
+    this.employeers = [];
+    this.adminService.getEmployers().subscribe((data: Response) => {
+        const res = JSON.parse(JSON.stringify(data));
+        for (let i in res ) {
+          let employee = new Employer( res[i]['passport'],res[i]['name'], res[i]['surname'], res[i]['pathronymic'], res[i]['company'], res[i]['position']);
+          this.employeers.push(employee);
+        }
+      },
+      error => this.err('Ошибка при загрузке сотрудников'));
+  }
 }

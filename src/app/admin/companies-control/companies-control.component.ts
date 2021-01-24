@@ -41,4 +41,17 @@ public companies: Company[] = [];
     this.errMessage = mes;
     setTimeout(() => {this.errMessage = null; }, 3000);
   }
+
+  refresh(){
+    this.addFormOpened = ! this.addFormOpened;
+    if (this.addFormOpened) return;
+    this.companies = [];
+    this.adminService.getCompanies().subscribe( (data: Response) => {
+      const res = JSON.parse(JSON.stringify(data));
+      for (let i in res ) {
+        let comp =new Company(res[i]['name'], res[i]['type']);
+        this.companies.push(comp);
+      }
+    }, error => this.err('Ошибка при загрузке компаний'));
+  }
 }

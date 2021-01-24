@@ -1,4 +1,4 @@
-<button [hidden]="sheduleOpened" (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
+<button [hidden]="sheduleOpened" (click)="refresh()">{{addFormOpened?'Вернуться':'Добавить'}}</button>
 <br/>
 <span *ngIf="errMessage">{{errMessage}}</span><br/>
 <div *ngIf="addFormOpened" class="container addForm">

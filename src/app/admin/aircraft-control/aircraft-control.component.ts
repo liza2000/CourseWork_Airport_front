@@ -49,6 +49,18 @@ export class AircraftControlComponent implements OnInit {
         this.err('Самолёт уже существует');
   })
   }
+  refresh(){
+    this.addFormOpened = !this.addFormOpened;
+    if(this.addFormOpened) return;
+    this.aircrafts = [];
+    this.adminService.getAircrafts().subscribe((data: Response) => {
+      const res = JSON.parse(JSON.stringify(data));
+      for (let i in res ) {
+        let aircraft = new Aircraft(res[i]['company'], res[i]['id'], res[i]['location'], res[i]['aircraftmodel']);
+        this.aircrafts.push(aircraft);
+      }
+    }, error => this.err('Ошибка при загрузке самолётов'));
+  }
   err(mes: string){
     this.errMessage = mes;
     setTimeout(() => {this.errMessage = null; }, 3000);
