@@ -58,7 +58,9 @@ export class FlightControlComponent implements OnInit {
   addNew(aircraft: string, depDate: string, depTime: string, arrdate: string, arrtime: string, dep: string, arr: string) {
     const scheduleDep = new Date(depDate + 'T' + depTime);
     const scheduleArr = new Date(arrdate + 'T' + arrtime);
-    this.adminService.addNewFlight(aircraft, scheduleDep, scheduleArr, dep, arr).subscribe(data => alert('Полёт добавлен'));
+    this.adminService.addNewFlight(aircraft, scheduleDep, scheduleArr, dep, arr).subscribe(data => alert('Полёт добавлен'), error => {
+      alert('Данные некорректны');
+    });
   }
   delete(id: number) {
     this.adminService.deleteFlight(id).subscribe(data => this.allflights = this.allflights.filter(f => f.id!=id));
