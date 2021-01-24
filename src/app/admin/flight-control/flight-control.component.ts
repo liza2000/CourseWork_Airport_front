@@ -23,10 +23,18 @@ export class FlightControlComponent implements OnInit {
       for (let i in res ) {
         let flight = new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
           res[i]['deptime'],res[i]['arrtime'], res[i]['count'],res[i]['actualArrtime'],res[i]['actualDeptime'],res[i]['aircraft'],res[i]['status']);
+        flight.actualArrtime.setHours(flight.actualArrtime.getHours()+3);
+        flight.actualDeptime.setHours(flight.actualDeptime.getHours()+3);
+        flight.deptime.setHours(flight.deptime.getHours()+3);
+        flight.arrtime.setHours(flight.arrtime.getHours()+3);
         this.allflights.push(flight);
       }
     } , error => alert('Ошибка при загрузке полётов'));
-   // this.allflights.push(this.flight);
+    // this.allflights.push(this.flight);
+    // this.flight.actualArrtime.setHours(this.flight.actualArrtime.getHours()+3);
+    // this.flight.actualDeptime.setHours(this.flight.actualDeptime.getHours()+3);
+    // this.flight.deptime.setHours(this.flight.deptime.getHours()+3);
+    // this.flight.arrtime.setHours(this.flight.arrtime.getHours()+3);
   }
   setTime(time: string, date: Date) {
     date.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
