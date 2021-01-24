@@ -9,6 +9,7 @@ import {BookTicketsService} from '../../services/book-tickets.service';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit, AfterViewInit {
+  errMessage: string;
 public flight: number;
 public passengers: Passenger[] = [] ;
 public contactInfo: string;
@@ -42,8 +43,8 @@ public count;
 
   sendBook() {
    this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight)
-     .subscribe(data => {this.bookKey = data as number; alert('Бронь успешно добавлена')},
-         error => {alert('Ошибка при бронировании')});
+     .subscribe(data => {this.bookKey = data as number; this.err('Бронь успешно добавлена')},
+         error => {this.err('Ошибка при бронировании')});
   }
   setContact(v) {
     this.contactInfo = v;
@@ -100,5 +101,8 @@ public count;
     this.currentEc = this.countOfEconomy - ec;
     this.currentBus = this.countOfBusiness - bus;
   }
-
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
+  }
 }

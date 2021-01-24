@@ -1,5 +1,5 @@
-<button (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
-
+<button (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button><br/>
+<span *ngIf="errMessage">{{errMessage}}</span><br/>
 <div *ngIf="addFormOpened" class="container addForm">
   <label>id<br/>
     <input required="true" type="text" pattern="^[a-zA-Z0-9]+$" maxlength="5" minlength="5" #newId/>

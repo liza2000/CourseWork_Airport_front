@@ -8,6 +8,7 @@ import {Flight} from '../../model/flight';
   styleUrls: ['./flight-control.component.css']
 })
 export class FlightControlComponent implements OnInit {
+  errMessage: string;
   addFormOpened = false;
 //   public flight: Flight = new Flight('1','dd','dd','2020-12-08T22:00:00','2020-12-08T22:00:00','3','2020-12-08T22:00:00','2020-12-08T22:00:00','dd','sd');
   // public flight1: Flight = new Flight();
@@ -17,7 +18,7 @@ export class FlightControlComponent implements OnInit {
 
   ngOnInit() {
     this.adminService.getPuncts().subscribe(data => (data as string[]).forEach( p => this.puncts.push(p)),
-        error => alert('ошибка при загрузке пунктов'));
+        error => this.err('ошибка при загрузке пунктов'));
     this.adminService.getFlights().subscribe((data: Response) => {
       const res = JSON.parse(JSON.stringify(data));
       for (let i in res ) {
@@ -29,7 +30,7 @@ export class FlightControlComponent implements OnInit {
         flight.arrtime.setHours(flight.arrtime.getHours()+3);
         this.allflights.push(flight);
       }
-    } , error => alert('Ошибка при загрузке полётов'));
+    } , error => this.err('Ошибка при загрузке полётов'));
     // this.allflights.push(this.flight);
     // this.flight.actualArrtime.setHours(this.flight.actualArrtime.getHours()+3);
     // this.flight.actualDeptime.setHours(this.flight.actualDeptime.getHours()+3);
@@ -38,7 +39,7 @@ export class FlightControlComponent implements OnInit {
   }
   setTime(time: string, date: Date) {
     date.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
-    //alert(this.flight.deptime);
+    //this.err(this.flight.deptime);
   }
   setDate(date: string, flightDate: Date) {
    let d = new Date(date);
@@ -58,8 +59,8 @@ export class FlightControlComponent implements OnInit {
   addNew(aircraft: string, depDate: string, depTime: string, arrdate: string, arrtime: string, dep: string, arr: string) {
     const scheduleDep = new Date(depDate + 'T' + depTime);
     const scheduleArr = new Date(arrdate + 'T' + arrtime);
-    this.adminService.addNewFlight(aircraft, scheduleDep, scheduleArr, dep, arr).subscribe(data => alert('Полёт добавлен'), error => {
-      alert('Данные некорректны');
+    this.adminService.addNewFlight(aircraft, scheduleDep, scheduleArr, dep, arr).subscribe(data => this.err('Полёт добавлен'), error => {
+      this.err('Данные некорректны');
     });
   }
   delete(id: number) {
@@ -67,10 +68,13 @@ export class FlightControlComponent implements OnInit {
   }
   change(flight: Flight) {
     this.adminService.changeFlight(flight).subscribe(data => {
-      alert('Данные изменены')
+      this.err('Данные изменены')
     }, error => {
-     alert('Данные некорректны');
+     this.err('Данные некорректны');
     });
   }
-
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
+  }
 }

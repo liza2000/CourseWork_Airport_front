@@ -1,4 +1,6 @@
 <button [hidden]="sheduleOpened" (click)="addFormOpened = !addFormOpened">{{addFormOpened?'Вернуться':'Добавить'}}</button>
+<br/>
+<span *ngIf="errMessage">{{errMessage}}</span><br/>
 <div *ngIf="addFormOpened" class="container addForm">
   <label>Паспорт<br/>
     <input type="text" pattern="^[0-9]+$" maxlength="10" minlength="10"  #newPassport/>

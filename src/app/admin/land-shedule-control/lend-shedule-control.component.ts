@@ -11,6 +11,7 @@ import {Flight} from '../../model/flight';
   styleUrls: ['./lend-shedule-control.component.css']
 })
 export class LendSheduleControlComponent implements OnInit {
+  errMessage: string;
   employer: Employer;
   addFormOpened = false;
   // public work: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-01-11T11:00:00'), new Date('2021-01-11T23:00:00'));

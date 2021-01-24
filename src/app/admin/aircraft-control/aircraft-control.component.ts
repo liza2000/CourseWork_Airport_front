@@ -8,6 +8,7 @@ import {AdminService} from '../../services/admin.service';
   styleUrls: ['./aircraft-control.component.css']
 })
 export class AircraftControlComponent implements OnInit {
+  errMessage: string;
   addFormOpened = false;
 // public aircraft: Aircraft = new Aircraft();
 //   public aircraft1: Aircraft = new Aircraft();
@@ -23,7 +24,7 @@ export class AircraftControlComponent implements OnInit {
         let aircraft = new Aircraft(res[i]['company'], res[i]['id'], res[i]['location'], res[i]['aircraftmodel']);
         this.aircrafts.push(aircraft);
       }
-    }, error => alert('Ошибка при загрузке самолётов'));
+    }, error => this.err('Ошибка при загрузке самолётов'));
   }
 
   setModel(model: string, aircraft: Aircraft) {
@@ -36,17 +37,21 @@ export class AircraftControlComponent implements OnInit {
     this.adminService.deleteAircraft(id).subscribe(data => this.aircrafts = this.aircrafts.filter(aircraft => !aircraft.id.localeCompare(id)));
   }
   change(aircraft: Aircraft) {
-    this.adminService.changeAircraft(aircraft).subscribe(data => alert('Самолёт изменён'), err => {
-      alert('Не удалось изменить')
+    this.adminService.changeAircraft(aircraft).subscribe(data => this.err('Самолёт изменён'), err => {
+      this.err('Не удалось изменить')
     });
   }
   addNew(id: string, company: string, model: string) {
-    this.adminService.addNewAircraft(id, company, model).subscribe(data => alert('Самолёт добавлен'), err => {
+    this.adminService.addNewAircraft(id, company, model).subscribe(data => this.err('Самолёт добавлен'), err => {
       if (err.status==404)
-        alert('Компания не найдена');
+        this.err('Компания не найдена');
       if (err.status==400)
-        alert('Самолёт уже существует');
+        this.err('Самолёт уже существует');
   })
+  }
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
   }
 
 }

@@ -9,6 +9,7 @@ import {Aircraft} from '../../model/aircraft';
   styleUrls: ['./companies-control.component.css']
 })
 export class CompaniesControlComponent implements OnInit {
+  errMessage: string;
    addFormOpened = false;
 // public company: Company = new Company();
 // public company1: Company = new Company();
@@ -24,17 +25,20 @@ public companies: Company[] = [];
         let comp =new Company(res[i]['name'], res[i]['type']);
         this.companies.push(comp);
       }
-    }, error => alert('Ошибка при загрузке компаний'));
+    }, error => this.err('Ошибка при загрузке компаний'));
   }
   addNewCompany(name: string, type: string) {
-    this.adminService.addNewCompany(name, type).subscribe(data => alert('Компания добавлена'),
+    this.adminService.addNewCompany(name, type).subscribe(data => this.err('Компания добавлена'),
       error => {
-      if (error.status == 400) alert('Компания уже существует');
+      if (error.status == 400) this.err('Компания уже существует');
       }
     );
   }
   delete(comp: Company) {
     this.adminService.deleteCompany(comp).subscribe(data => this.companies = this.companies.filter(c => !c.name.localeCompare(comp.name)));
   }
-
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
+  }
 }
