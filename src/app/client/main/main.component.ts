@@ -45,7 +45,4 @@ export class MainComponent implements OnInit {
     this.betweenComponentsService.sendFlight(flight.id);
     this.betweenComponentsService.sendCount(flight.count);
   }
-  loadBook(val: string) {
-    this.betweenComponentsService.sendBookID(val);
-  }
 }

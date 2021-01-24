@@ -12,7 +12,7 @@ export class FlightControlComponent implements OnInit {
 //   public flight: Flight = new Flight('1','dd','dd','2020-12-08T22:00:00','2020-12-08T22:00:00','3','2020-12-08T22:00:00','2020-12-08T22:00:00','dd','sd');
   // public flight1: Flight = new Flight();
   public allflights: Flight[] = [];
-  public puncts: string[];
+  public puncts: string[] = [];
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
