@@ -4,21 +4,22 @@
     <input type="text" pattern="^[0-9]+$" maxlength="10" minlength="10"  #newPassport/>
   </label><br/>
   <label>Имя<br/>
-    <input type="text" #newName/>
+    <input required="true" type="text" #newName/>
   </label><br/>
   <label>Фамилия<br/>
-    <input type="text" #newSurname/>
+    <input required="true" type="text" #newSurname/>
   </label><br/>
   <label>Отчество<br/>
-    <input type="text" #newPathronymic/>
+    <input required="true"  type="text" #newPathronymic/>
   </label><br/>
   <label>Должность<br/>
-    <input type="text" #newPosition/>
+    <input required="true" type="text" #newPosition/>
   </label><br/>
   <label>Компания<br/>
-    <input type="text" #newCompany/>
+    <input required="true" type="text" #newCompany/>
   </label><br/>
-  <label> <button (click)="newPassport.checkValidity()&&addNewEmpl(newPassport.value,newName.value,newSurname.value, newPathronymic.value, newPosition.value, newCompany.value)">Добавить</button></label>
+  <label> <button (click)="newName.checkValidity()&&newSurname.checkValidity()&&newPathronymic.checkValidity()&&newPathronymic.checkValidity()&&newPosition.checkValidity()&&newCompany.checkValidity()&&
+  newPassport.checkValidity()&&addNewEmpl(newPassport.value,newName.value,newSurname.value, newPathronymic.value, newPosition.value, newCompany.value)">Добавить</button></label>
 </div>
 <table *ngIf="!addFormOpened" [hidden]="sheduleOpened">
   <tr>

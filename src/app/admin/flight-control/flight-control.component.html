@@ -2,36 +2,34 @@
 
 <div *ngIf="addFormOpened" class="container addForm">
   <label>Самолёт<br/>
-    <input type="text" #newAircraft/>
+    <input required="true" type="text" #newAircraft/>
   </label><br/>
   <label>Время вылета<br/>
-    <input type="date" #newFlightDepDate/>
-    <input type="time" #newFlightDepTime>
+    <input required="true" type="date" #newFlightDepDate/>
+    <input required="true" type="time" #newFlightDepTime>
   </label><br/>
   <label>Время прилета<br/>
-    <input type="date" #newFlightArrDate/>
-    <input type="time" #newFlightArrTime>
+    <input required="true" type="date" #newFlightArrDate/>
+    <input required="true" type="time" #newFlightArrTime>
   </label><br/>
   <label>Аэропорт вылета<br/>
-    <select  #newFlightDep>
-      <option selected>Не выбрано</option>
-      <option *ngFor="let punct of puncts">
-        {{punct}}
-      </option>
-    </select>
+    <input list="loc" required="true"  #newFlightDep>
   </label><br/>
   <label>Аэропорт прилёта<br/>
-    <select #newFlightArr>
-      <option selected>Не выбрано</option>
-      <option *ngFor="let punct of puncts">
-        {{punct}}
-      </option>
-    </select>
+    <input required="true" list="loc" #newFlightArr>
+
   </label><br/>
-  <label> <button (click)="addNew(newAircraft.value, newFlightDepDate.value, newFlightDepTime.value,
+  <label> <button (click)="
+  newAircraft.checkValidity()&&newFlightDepDate.checkValidity()&&newFlightDepTime.checkValidity()&&
+  newFlightArrDate.checkValidity()&&newFlightArrTime.checkValidity()&&newFlightDep.checkValidity()&&newFlightArr.checkValidity()&&
+  addNew(newAircraft.value, newFlightDepDate.value, newFlightDepTime.value,
   newFlightArrDate.value, newFlightArrTime.value, newFlightDep.value, newFlightArr.value)">Добавить</button></label>
 </div>
-
+<datalist id="loc">
+  <option *ngFor="let punct of puncts">
+    {{punct}}
+  </option>
+</datalist>
 <table *ngIf="!addFormOpened">
   <tr>
     <th style="width: 20px">id</th>
@@ -84,11 +82,7 @@
     </span></td>
     <td><label>
       <input #dep list="loc" [value]="flight.dep" type="text" (change)="setDep(dep.value,flight)"/>
-        <datalist id="loc">
-        <option *ngFor="let punct of puncts">
-          {{punct}}
-        </option>
-        </datalist>
+
     </label></td>
     <td><label>
       <input list="loc" type="text" #arr [value]="flight.arr" (change)="setArr(arr.value,flight)">

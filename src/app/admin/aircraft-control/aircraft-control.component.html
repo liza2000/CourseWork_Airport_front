@@ -2,18 +2,19 @@
 
 <div *ngIf="addFormOpened" class="container addForm">
   <label>id<br/>
-    <input type="text" pattern="^[a-zA-Z0-9]+$" maxlength="5" minlength="5" #newId/>
+    <input required="true" type="text" pattern="^[a-zA-Z0-9]+$" maxlength="5" minlength="5" #newId/>
   </label><br/>
   <label>Название<br/>
-    <input type="text" #newAirName/>
+    <input required="true" type="text" #newAirName/>
   </label><br/>
   <label>Модель<br/>
-    <input type="text" #newAircraftModel/>
+    <input required="true"type="text" #newAircraftModel/>
   </label><br/>
   <label>Компания<br/>
-    <input type="text" #newAircraftCompany/>
+    <input required="true" type="text" #newAircraftCompany/>
   </label><br/>
- <label> <button (click)="addNew(newId.value,newAirName.value, newAircraftCompany.value, newAircraftModel.value)">Добавить</button></label>
+ <label> <button (click)="newId.checkValidity()&&newAirName.checkValidity()&&newAircraftModel.checkValidity()&&newAircraftCompany.checkValidity()&&
+ addNew(newId.value,newAirName.value, newAircraftCompany.value, newAircraftModel.value)">Добавить</button></label>
 </div>
 <table *ngIf="!addFormOpened">
   <tr>

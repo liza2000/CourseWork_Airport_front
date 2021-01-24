@@ -3,22 +3,24 @@
 <div *ngIf="addFormOpened" class="container addForm">
 
     <label>Полёт<br/>
-    <input type="text" #newFlight/>
+    <input required="true" type="text" #newFlight/>
   </label><br/>
     <label>Стойка <br/>
-      <input type="number" min="1" max="100" #newGate/>
+      <input required="true" type="number" min="1" max="100" #newGate/>
     </label><br/>
 
   <label>Начало<br/>
-    <input type="date" #newStartDate/>
-    <input type="time" #newStartTime>
+    <input required="true" type="date" #newStartDate/>
+    <input required="true" type="time" #newStartTime>
   </label><br/>
   <label>Окончание<br/>
-    <input type="date" #newFinishDate/>
-    <input type="time" #newFinishTime>
+    <input required="true" type="date" #newFinishDate/>
+    <input required="true" type="time" #newFinishTime>
   </label><br/>
 
-  <label> <button (click)="addNew(newFlight.value, newStartDate.value, newStartTime.value, newFinishDate.value, newFinishTime.value, newGate.value)">Добавить</button></label>
+  <label> <button (click)="
+  newFlight.checkValidity()&&newGate.checkValidity()&&newStartDate.checkValidity()&&newStartTime.checkValidity()&&newFinishDate.checkValidity()&&newFinishTime.checkValidity()&&
+  addNew(newFlight.value, newStartDate.value, newStartTime.value, newFinishDate.value, newFinishTime.value, newGate.value)">Добавить</button></label>
 </div>
 <table *ngIf="!addFormOpened">
   <tr>
