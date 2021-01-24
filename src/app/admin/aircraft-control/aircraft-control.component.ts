@@ -42,7 +42,7 @@ export class AircraftControlComponent implements OnInit {
     });
   }
   addNew(id: string, company: string, model: string) {
-    this.adminService.addNewAircraft(id, company, model).subscribe(data => this.err('Самолёт добавлен'), err => {
+    this.adminService.addNewAircraft(id, model, company).subscribe(data => this.err('Самолёт добавлен'), err => {
       if (err.status==404)
         this.err('Компания не найдена');
       if (err.status==400)

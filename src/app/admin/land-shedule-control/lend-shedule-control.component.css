@@ -15,7 +15,6 @@ input{
 .addForm input{
   background-color: white;
   color: black;
-  width: 100px;
   padding: 3px;
 }
 .addForm label, .addForm button {
