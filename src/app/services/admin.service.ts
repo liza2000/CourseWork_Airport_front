@@ -70,7 +70,7 @@ export class AdminService {
     };
     return  this.httpClient.post(AppComponent.API_URL + 'admin/flight/add/', body, {headers: AdminService.getHeaders()});
   }
-  addNewSchedule(empl: number, flt: string, start: Date, finish: Date, gt: string) {
+  addNewSchedule(empl: string, flt: string, start: Date, finish: Date, gt: string) {
     const body = {
       employee_id: empl,
       flight_id: flt,
@@ -96,7 +96,7 @@ export class AdminService {
   deleteCompany(comp: Company) {
     return  this.httpClient.post(AppComponent.API_URL + 'admin/companies/delete/', {name: comp.name, type: comp.type}, {headers: AdminService.getHeaders()});
   }
-  deleteEmpl(pass: number) {
+  deleteEmpl(pass: string) {
     return  this.httpClient.post(AppComponent.API_URL + 'admin/employee/delete/', {passport: pass}, {headers: AdminService.getHeaders()});
   }
   changeEmployee(empl: Employer) {
@@ -108,10 +108,10 @@ export class AdminService {
   changeFlight(flt: Flight) {
     return  this.httpClient.post(AppComponent.API_URL + 'admin/flight/change/', {flight: flt}, {headers: AdminService.getHeaders()});
   }
-  deleteWork(flt: number, empl: number) {
+  deleteWork(flt: number, empl: string) {
     return  this.httpClient.post(AppComponent.API_URL + 'admin/schedule/delete/', {flight: flt, employee: empl}, {headers: AdminService.getHeaders()});
   }
-  changeWork(wrk: WorkAtTime, empl: number) {
+  changeWork(wrk: WorkAtTime, empl: string) {
     return  this.httpClient.post(AppComponent.API_URL + 'admin/schedule/change/', {work: wrk, employee: empl}, {headers: AdminService.getHeaders()});
   }
 
