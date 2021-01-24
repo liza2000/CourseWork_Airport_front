@@ -10,6 +10,7 @@ import {RegistrationService} from '../../services/registration.service';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  errMessage: string;
   public flight: number;
   public passenger: Passenger;
   public overWeight = 0;
@@ -29,7 +30,7 @@ export class RegistrationComponent implements OnInit {
       this.passenger.passport_no = res['passport_no'];
       this.passenger.max_weight = res['max_weight'];
       this.passenger.status = res['status'];
-    }, error => alert('Пассажир не найден') );
+    }, error => this.err('Пассажир не найден') );
   }
   setTotalWeight(v) {
     this.passenger.total_weight = Number(v.replace(',', '.'));
@@ -39,13 +40,17 @@ export class RegistrationComponent implements OnInit {
   }
   toRegistrate() {
     this.regService.toRegistrate(this.passenger, this.flight.toString()).subscribe( (data: Response) => {
-      alert('Пассажир был успешно зарегестрирован')
+      this.err('Пассажир был успешно зарегестрирован')
     });
     this.passenger.passport_no = '';
     this.passenger.total_weight = 0;
     this.startReg = false;
     this.overWeight = 0;
     this.passenger.status = 'null';
+  }
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
   }
 
 

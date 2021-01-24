@@ -37,7 +37,7 @@ export class LendSheduleControlComponent implements OnInit {
     this.adminService.deleteWork(work.flight, this.employer.passport).subscribe(data => this.schedule = this.schedule.filter(w => w.flight!=work.flight));
   }
   public change(work: WorkAtTime) {
-    this.adminService.changeWork(work, this.employer.passport);
+    this.adminService.changeWork(work, this.employer.passport).subscribe(data => this.err('Смена изменена'), err => this.err('Не удалось изменить смену'));
   }
   public setGate(gate: string, work: WorkAtTime) {
     work.gate = Number(gate);
@@ -63,11 +63,15 @@ export class LendSheduleControlComponent implements OnInit {
   addNew(flight: string, startDate: string, startTime: string, finishDate: string, finishTime: string, gate: string) {
     const start = new Date(startDate + 'T' + startTime);
     const finish = new Date(finishDate + 'T' + finishTime);
-    this.adminService.addNewSchedule(this.employer.passport, flight, start, finish, gate).subscribe( data => alert('Смена добавлена'),
+    this.adminService.addNewSchedule(this.employer.passport, flight, start, finish, gate).subscribe( data => this.err('Смена добавлена'),
       error => {
-      if (error.status == 404) alert('Полёт не найден');
-        if (error.status == 400) alert('Смена на этот полёт уже существует');
+      if (error.status == 404) this.err('Полёт не найден');
+        if (error.status == 400) this.err('Смена на этот полёт уже существует');
       });
+  }
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
   }
 
 }

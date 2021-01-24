@@ -1,4 +1,5 @@
-<div class="regform container">
+<div class="regform container"><br/>
+  <span *ngIf="errMessage">{{errMessage}}</span><br/>
   <label> Номер паспорта:
     <input type="text" (change)="passport.checkValidity() && setPassport(passport.value)"
            #passport   pattern="^[0-9]+$" maxlength="10" minlength="10" [ngModel]="passenger.passport_no">

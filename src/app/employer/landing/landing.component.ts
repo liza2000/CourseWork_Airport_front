@@ -9,6 +9,7 @@ import {LandService} from '../../services/land.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  errMessage: string;
  public passenger: Passenger;
  public flight: number;
  constructor(public landService: LandService, public betweenComponentsService: BetweenComponentsService) { }
@@ -29,16 +30,20 @@ export class LandingComponent implements OnInit {
       this.passenger.passport_no = res['passport_no'];
       this.passenger.max_weight = res['max_weight'];
       this.passenger.status = res['status'];
-    }, error => alert('Данный пассажир не зарегестрирован на рейс') );
+    }, error => this.err('Данный пассажир не зарегестрирован на рейс') );
   }
 
   toLand() {
 
   if (this.passenger.status!='null')  this.landService.toLand(this.passenger, this.flight.toString()).subscribe((data: Response) => {
-    alert('Пассажир прошел контроль')
+    this.err('Пассажир прошел контроль')
   });
     this.passenger.passport_no = '';
     this.passenger.status = 'null';
 
+  }
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
   }
 }

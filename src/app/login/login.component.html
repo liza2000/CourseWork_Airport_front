@@ -1,5 +1,6 @@
 <button [routerLink]="['/main']">На главную</button>
-<div align="center"  class="container">
+<div align="center"  class="container"><br/>
+  <span *ngIf="errMessage">{{errMessage}}</span><br/>
   <h1> Авторизация </h1>
     <div class="formdiv">
       <label >ID

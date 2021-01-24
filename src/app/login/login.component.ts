@@ -9,7 +9,7 @@ import {ScheduleService} from '../services/schedule.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  errMessage: string;
   constructor(private router: Router, private service: BetweenComponentsService, private schedService: ScheduleService) { }
 
   ngOnInit() {
@@ -20,13 +20,17 @@ export class LoginComponent implements OnInit {
       pos = data as string;
       console.log(pos)
       if (!pos.localeCompare('reception') && !pos.localeCompare('gate')) {
-        alert('Такого сотрудника не существует');
+        this.err('Такого сотрудника не существует');
         return;
       } //todo закомменчивайте эту строку если тестите сотрудников
       localStorage.setItem('CurrentEmpl', id);
       localStorage.setItem('PositionOfCurrentEmpl', pos);
       this.router.navigate(['/employer']);
     })
+  }
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
   }
 
 }
