@@ -20,11 +20,11 @@ export class RegistrationComponent implements OnInit {
     this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
   }
   setPassport(v: string) {
-    this.passenger = new Passenger();
     this.passenger.passport_no = v;
     this.startReg = true;
     this.regService.getPassenger(v, this.flight).subscribe(
       (data:Response) => {
+      this.passenger = new Passenger();
       const res = JSON.parse(JSON.stringify(data));
       this.passenger.passport_no = res['passport_no'];
       this.passenger.max_weight = res['max_weight'];
