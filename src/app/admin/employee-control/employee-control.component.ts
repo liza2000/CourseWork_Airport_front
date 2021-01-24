@@ -51,7 +51,7 @@ export class EmployeeControlComponent implements OnInit {
   addNewEmpl(passport: string, name: string, surname: string, pathronymic: string, position: string, company) {
     this.adminService.addNewEmpl(passport, name, surname, pathronymic, position, company);
   }
-  delete(passport: number) {
+  delete(passport: string) {
     this.adminService.deleteEmpl(passport).subscribe(data => this.employeers = this.employeers.filter(e => e.passport!=passport));
   }
   change(empl: Employer) {

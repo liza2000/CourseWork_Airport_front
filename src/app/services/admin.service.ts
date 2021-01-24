@@ -37,7 +37,7 @@ export class AdminService {
   getFlights() {
    return  this.httpClient.get(AppComponent.API_URL  + 'admin/flight/get/', {headers: AdminService.getHeaders()});
   }
-  getSchedule(passport: number) {
+  getSchedule(passport: string) {
    return  this.httpClient.get(AppComponent.API_URL  + 'admin/schedule/get/'+passport, {headers: AdminService.getHeaders()});
   }
   addNewAircraft(airid: string, name: string, mod: string, comp: string) {
