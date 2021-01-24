@@ -90,7 +90,7 @@ export class AdminService {
    return  this.httpClient.post(AppComponent.API_URL + 'admin/aircraft/delete/', {id: aircraft}, {headers: AdminService.getHeaders()});
   }
   changeAircraft(aircraft: Aircraft) {
-   return  this.httpClient.post(AppComponent.API_URL + 'admin/aircraft/change/', {owner_id: aircraft.company, model: aircraft.aircraftmodel}, {headers: AdminService.getHeaders()});
+   return  this.httpClient.post(AppComponent.API_URL + 'admin/aircraft/change/', {id: aircraft.id, owner_id: aircraft.company, model: aircraft.aircraftmodel}, {headers: AdminService.getHeaders()});
   }
   deleteCompany(comp: Company) {
     return  this.httpClient.post(AppComponent.API_URL + 'admin/companies/delete/', {name: comp.name, type: comp.type}, {headers: AdminService.getHeaders()});
