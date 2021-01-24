@@ -24,10 +24,10 @@ export class FlightControlComponent implements OnInit {
       for (let i in res ) {
         let flight = new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
           res[i]['deptime'],res[i]['arrtime'], res[i]['count'],res[i]['actualArrtime'],res[i]['actualDeptime'],res[i]['aircraft'],res[i]['status']);
-        // flight.actualArrtime.setHours(flight.actualArrtime.getHours()+3);
-        // flight.actualDeptime.setHours(flight.actualDeptime.getHours()+3);
-        // flight.deptime.setHours(flight.deptime.getHours()+3);
-        // flight.arrtime.setHours(flight.arrtime.getHours()+3);
+        flight.actualArrtime.setHours(flight.actualArrtime.getHours()+3);
+        flight.actualDeptime.setHours(flight.actualDeptime.getHours()+3);
+        flight.deptime.setHours(flight.deptime.getHours()+3);
+        flight.arrtime.setHours(flight.arrtime.getHours()+3);
         this.allflights.push(flight);
       }
     } , error => this.err('Ошибка при загрузке полётов'));
@@ -89,10 +89,10 @@ export class FlightControlComponent implements OnInit {
       for (let i in res ) {
         let flight = new Flight(res[i]['id'], res[i]['dep'], res[i]['arr'],
           res[i]['deptime'],res[i]['arrtime'], res[i]['count'],res[i]['actualArrtime'],res[i]['actualDeptime'],res[i]['aircraft'],res[i]['status']);
-        // flight.actualArrtime.setHours(flight.actualArrtime.getHours()+3);
-        // flight.actualDeptime.setHours(flight.actualDeptime.getHours()+3);
-        // flight.deptime.setHours(flight.deptime.getHours()+3);
-        // flight.arrtime.setHours(flight.arrtime.getHours()+3);
+        flight.actualArrtime.setHours(flight.actualArrtime.getHours()+3);
+        flight.actualDeptime.setHours(flight.actualDeptime.getHours()+3);
+        flight.deptime.setHours(flight.deptime.getHours()+3);
+        flight.arrtime.setHours(flight.arrtime.getHours()+3);
         this.allflights.push(flight);
       }
     } , error => this.err('Ошибка при загрузке полётов'));
