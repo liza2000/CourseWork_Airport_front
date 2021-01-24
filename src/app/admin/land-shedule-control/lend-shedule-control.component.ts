@@ -81,8 +81,8 @@ export class LendSheduleControlComponent implements OnInit {
       const res = JSON.parse(JSON.stringify(data));
       for (let i in res ) {
         let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);
-        work.start.setHours(work.start.getHours()+3);
-        work.finish.setHours(work.finish.getHours()+3);
+        // work.start.setHours(work.start.getHours()+3);
+        // work.finish.setHours(work.finish.getHours()+3);
         this.schedule.push(work);
       }
     } );
