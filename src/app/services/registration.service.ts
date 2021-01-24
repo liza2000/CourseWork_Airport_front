@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Passenger} from '../model/passenger';
+import {AppComponent} from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,10 @@ export class RegistrationService {
   }
   constructor(public httpClient: HttpClient) {}
   getPassenger(pass: string, flgt: number) {
-    return this.httpClient.post('jk', {passport: pass, flightID: flgt}, {headers: RegistrationService.getHeaders()});
+    return this.httpClient.post(AppComponent.API_URL + 'auth/passenger/', {passport: pass, flightID: flgt}, {headers: RegistrationService.getHeaders()});
   }
   toRegistrate(psg: Passenger, flgt: string) {
-    return this.httpClient.post('jk', {passport: psg.passport_no, totalWeight: psg.total_weight, flightID: flgt},
+    return this.httpClient.post(AppComponent.API_URL + 'auth/passenger/registrate/', {passport: psg.passport_no, totalWeight: psg.total_weight, flightID: flgt},
       {headers: RegistrationService.getHeaders()});
   }
 }

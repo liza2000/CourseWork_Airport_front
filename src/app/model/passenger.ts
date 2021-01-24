@@ -5,7 +5,7 @@ export class Passenger {
    second_name: string;
    third_name: string;
    birthday: Date;
-   seat: string;
+    seat: string;
    max_weight = 0;
    total_weight: number;
    status = 'accept';
