@@ -26,8 +26,8 @@ book: Book = new Book();
       this.book.id = res['id'];
       this.book.amount = res['amount'];
       this.book.contact = res['contact'];
-      this.book.arrTime = res['arrTime'];
-      this.book.depTime = res['depTime'];
+      this.book.arrTime = new Date(res['arrTime']);
+      this.book.depTime = new Date(res['depTime']);
       this.book.arrAirport = res['arrAirport'];
       this.book.depAirport = res['depAirport'];
       for (let i in res['passengers'] ) {
