@@ -14,10 +14,12 @@ export class EmployerComponent implements OnInit {
   public schedule: WorkAtTime[] = [];
   public isReady = false;
   public isReg;
+  passport: string;
   constructor(private router: Router, private betweenComponentsService: BetweenComponentsService,
               private scheduleService: ScheduleService) { }
   ngOnInit() {
     if (localStorage.getItem('CurrentEmpl') == null) { this.router.navigate(['/main']); }
+    this.passport = localStorage.getItem('CurrentEmpl');
     this.isReg = localStorage.getItem('PositionOfCurrentEmpl') === 'reception'; // todo если чекаете сотрудника регистрации тут должно быть true
     // this.schedule.push(this.work);
     // this.schedule.push(this.work1);
