@@ -43,7 +43,7 @@ public count;
 
   sendBook() {
    this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight)
-     .subscribe(data => {this.bookKey = data as number; this.err('Бронь успешно добавлена')},
+     .subscribe(data => {this.bookKey = data as number; this.err('Бронь успешно добавлена. Номер брони: '+this.bookKey)},
          error => {this.err('Ошибка при бронировании')});
   }
   setContact(v) {
