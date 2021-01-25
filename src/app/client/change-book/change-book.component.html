@@ -1,8 +1,8 @@
 <button [routerLink]="['/main']">Вернуться</button><br/>
-<div style="color: black" *ngIf="errMessage">{{errMessage}}</div><br/>
-<div style="color: black" *ngIf="book.depTime&&book.arrTime"> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.toLocaleString()}} - {{book.arrTime.toLocaleString()}}</div><br/>
 
 <div class="container">
+  <div *ngIf="errMessage">{{errMessage}}</div><br/>
+  <div *ngIf="book.depTime&&book.arrTime"> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.toLocaleString()}} - {{book.arrTime.toLocaleString()}}</div><br/>
 
   <br/>
   <form>
