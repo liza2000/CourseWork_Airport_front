@@ -1,5 +1,5 @@
 <button [routerLink]="['/main']">Вернуться</button><br/>
-
+<span *ngIf="errMessage">{{errMessage}}</span><br/>
 Полёт: {{flight.id}}<br/>
 
 <div class="container">
@@ -24,17 +24,17 @@
           {{p.birthday.toLocaleDateString()}}
         </label><br/>
         <span> Место:
-          <select #seat (change)="setSeat(p,seat.value)">
+          <select #seat [value]="p.seat" (change)="setSeat(p,seat.value)">
             <option>economy</option>
             <option>business</option>
           </select>
         </span><br/>
         <span >Вес багажа
-          <input  type="text" pattern="^[0-9]*[.,]?[0-9]+$" #baggage (change)="setBaggage(p,baggage.value)"/>
+          <input [value]="p.max_weight"  type="text" pattern="^[0-9]*[.,]?[0-9]+$" #baggage (change)="setBaggage(p,baggage.value)"/>
         </span><br/>
         <span>Комната ожидания
-          <select  #room (change)="setRoom(p,room.value)">
-            <option selected>middle</option>
+          <select [value]="p.waitingRoom"  #room (change)="setRoom(p,room.value)">
+            <option>middle</option>
             <option>comfort</option>
             <option>comfort+</option>
           </select>
@@ -47,7 +47,7 @@
     <br/>
     <div class="forspan">
       <span>Контактная информация<br/>
-        <textarea  (change)="setContact(contact.value)" #contact></textarea><br/>
+        <textarea [value]="book.contact"  (blur)="setContact(contact.value)" #contact></textarea><br/>
       </span><br/>
     </div>
   </form>

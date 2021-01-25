@@ -39,7 +39,7 @@ book: Book = new Book();
         passenger.birthday = new Date(i['birthday']);
         this.book.passengers.push(passenger);
       }
-    });
+    }, error =>  this.err('Ошибка при загрузке брони'));
   }
   setSeat(pass: Passenger, value: string) {
     pass.seat = value;
@@ -52,8 +52,8 @@ book: Book = new Book();
     pass.max_weight = Number(value);
   }
   setContact(v) {
-    this.contactInfo = v;
-    this.bookService.changeContactInfo(this.contactInfo);
+    this.book.contact = v;
+    this.bookService.changeContactInfo(this.book.contact).subscribe();
   }
   change(p: Passenger) {
     this.bookService.changeTicket(p, this.bookID);
