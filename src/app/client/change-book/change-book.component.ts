@@ -14,7 +14,6 @@ export class ChangeBookComponent implements OnInit {
   errMessage: string;
   flight: Flight;
 passengers: Passenger[] = [];
-contactInfo: string;
 bookID: string;
 book: Book = new Book();
   constructor(private bookService: BookTicketsService, private betweenCompService: BetweenComponentsService) { }

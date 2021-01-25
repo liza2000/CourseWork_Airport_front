@@ -24,30 +24,30 @@
           {{p.birthday.toLocaleDateString()}}
         </label><br/>
         <span> Место:
-          <select #seat [value]="p.seat" (change)="setSeat(p,seat.value)">
+          <select disabled #seat [value]="p.seat" (change)="setSeat(p,seat.value)">
             <option>economy</option>
             <option>business</option>
           </select>
         </span><br/>
         <span >Вес багажа
-          <input [value]="p.max_weight"  type="text" pattern="^[0-9]*[.,]?[0-9]+$" #baggage (change)="setBaggage(p,baggage.value)"/>
+          <input readonly [value]="p.max_weight"  type="text" pattern="^[0-9]*[.,]?[0-9]+$" #baggage (change)="setBaggage(p,baggage.value)"/>
         </span><br/>
         <span>Комната ожидания
-          <select [value]="p.waitingRoom"  #room (change)="setRoom(p,room.value)">
+          <select disabled [value]="p.waitingRoom"  #room (change)="setRoom(p,room.value)">
             <option>middle</option>
             <option>comfort</option>
             <option>comfort+</option>
           </select>
           <br/><br/>
         </span><br/>
-        <button (click)="change(p)">Изменить данные</button>
-        <button (click)="delete(p)">Удалить пассажира</button>
+<!--        <button (click)="change(p)">Изменить данные</button>-->
+<!--        <button (click)="delete(p)">Удалить пассажира</button>-->
       </div>
     </div>
     <br/>
     <div class="forspan">
       <span>Контактная информация<br/>
-        <textarea [value]="book.contact"  (blur)="setContact(contact.value)" #contact></textarea><br/>
+        <textarea readonly [value]="book.contact"  (blur)="setContact(contact.value)" #contact></textarea><br/>
       </span><br/>
     </div>
   </form>
