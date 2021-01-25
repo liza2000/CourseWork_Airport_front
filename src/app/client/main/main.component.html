@@ -3,7 +3,7 @@
     <button [routerLink]="['/login']">
       Войти
     </button><br/>
-  <label>Изменить бронь<br/>
+  <label>Посмотреть бронь<br/>
     <input type="text" required #bookid/><br/>
   <button (click)="bookid.checkValidity()&&loadBook(bookid.value)"  [routerLink]="['/change-book']">Изменить</button>
   </label>
