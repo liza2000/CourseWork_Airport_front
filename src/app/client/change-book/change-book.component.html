@@ -1,6 +1,6 @@
 <button [routerLink]="['/main']">Вернуться</button><br/>
 <span *ngIf="errMessage">{{errMessage}}</span><br/>
-Полёт: {{flight.id}}<br/>
+Полёт: {{flight}}<br/>
 
 <div class="container">
 
@@ -50,6 +50,7 @@
         <textarea readonly [value]="book.contact"  (blur)="setContact(contact.value)" #contact></textarea><br/>
       </span><br/>
     </div>
+    <button>Расчитать стоимость</button>
   </form>
   <br/>
   Цена: {{book.amount}}

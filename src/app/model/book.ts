@@ -7,8 +7,7 @@ export class Book {
   time: Date;
   passengers: Passenger[] = [];
   contact: string;
-  flight: Flight;
-  count = 3;
+  flight: string;
   constructor(){
   }
 }
