@@ -1,6 +1,6 @@
 <button [routerLink]="['/main']">Вернуться</button><br/>
-<span *ngIf="errMessage">{{errMessage}}</span><br/>
-<div> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.toLocaleString()}} - {{book.arrTime.toLocaleString()}}</div><br/>
+<div *ngIf="errMessage">{{errMessage}}</div><br/>
+<div> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.getFullYear()}} - {{book.arrTime.getFullYear()}}</div><br/>
 
 <div class="container">
 
