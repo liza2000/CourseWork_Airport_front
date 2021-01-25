@@ -1,6 +1,6 @@
 <button [routerLink]="['/main']">Вернуться</button><br/>
 <span *ngIf="errMessage">{{errMessage}}</span><br/>
-<div> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.toLocaleTimeString()}} - {{book.arrTime.toLocaleTimeString()}}</div><br/>
+<!--<div> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.toLocaleTimeString()}} - {{book.arrTime.toLocaleTimeString()}}</div><br/>-->
 
 <div class="container">
 
@@ -8,9 +8,6 @@
   <form>
     <div class="passengers">
       <div class="passenger" *ngFor="let p of book.passengers">
-        <label> Паспорт:
-          {{p.passport_no}}
-        </label><br/>
         <label> Фамилия:
       {{p.second_name}}
         </label><br/>
@@ -23,10 +20,10 @@
         <span> Место:
           {{p.seat}}
         </span><br/>
-        <span >Вес багажа
-          {{p.max_weight}}}
+        <span >Вес багажа:
+          {{p.max_weight}}
         </span><br/>
-        <span>Комната ожидания
+        <span>Комната ожидания:
           {{p.waitingRoom}}
           <br/><br/>
         </span><br/>
