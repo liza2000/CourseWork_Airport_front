@@ -1,6 +1,6 @@
 <button [routerLink]="['/main']">Вернуться</button><br/>
 <span *ngIf="errMessage">{{errMessage}}</span><br/>
-<div> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.toLocaleString()}} - {{book.arrTime.toLocaleString()}}</div><br/>
+<div> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.toLocaleTimeString()}} - {{book.arrTime.toLocaleTimeString()}}</div><br/>
 
 <div class="container">
 
@@ -21,30 +21,21 @@
           {{p.third_name}}
         </label><br/>
         <span> Место:
-          <select disabled #seat [value]="p.seat" (change)="setSeat(p,seat.value)">
-            <option>economy</option>
-            <option>business</option>
-          </select>
+          {{p.seat}}
         </span><br/>
         <span >Вес багажа
-          <input readonly [value]="p.max_weight"  type="text" pattern="^[0-9]*[.,]?[0-9]+$" #baggage (change)="setBaggage(p,baggage.value)"/>
+          {{p.max_weight}}}
         </span><br/>
         <span>Комната ожидания
-          <select disabled [value]="p.waitingRoom"  #room (change)="setRoom(p,room.value)">
-            <option>middle</option>
-            <option>comfort</option>
-            <option>comfort+</option>
-          </select>
+          {{p.waitingRoom}}
           <br/><br/>
         </span><br/>
-<!--        <button (click)="change(p)">Изменить данные</button>-->
-<!--        <button (click)="delete(p)">Удалить пассажира</button>-->
       </div>
     </div>
     <br/>
     <div class="forspan">
       <div>Контактная информация<br/>
-        <textarea readonly [value]="book.contact"  (blur)="setContact(contact.value)" #contact></textarea><br/>
+        {{book.contact}}
       </div><br/>
     </div>
   </form>
