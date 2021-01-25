@@ -42,13 +42,13 @@
       <input #startdate type="date"  [valueAsDate]="work.start" (change)="setStartDate(startdate.value, work)">
     </label></td>
     <td><label>
-      <input #starttime type="time" [valueAsNumber]="work.start" (change)="setStartTime(starttime.value, work)">
+      <input #starttime type="time" [valueAsNumber]="work.start" (blur)="setStartTime(startdate.value, starttime.value, work)">
     </label></td>
     <td><label>
       <input #finishDate type="date"  [valueAsDate]="work.finish" (change)="setFinishDate(finishDate.value, work)">
     </label></td>
     <td><label>
-      <input #finishTime type="time" [valueAsNumber]="work.finish" (change)="setFinishTime(finishTime.value, work)">
+      <input #finishTime type="time" [valueAsNumber]="work.finish" (blur)="setFinishTime(finishDate.value,finishTime.value, work)">
     </label></td>
 
     <td>

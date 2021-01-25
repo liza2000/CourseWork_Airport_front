@@ -53,32 +53,32 @@
       <input #depdate type="date"  [valueAsDate]="flight.deptime" (change)="setDate(depdate.value, flight.deptime)">
     </label></td>
     <td><label>
-      <input #deptime type="time" [valueAsNumber]="flight.deptime" (change)="setTime(deptime.value, flight.deptime)">
+      <input #deptime type="time" [valueAsNumber]="flight.deptime" (blur)="setTime(depdate.value, deptime.value, flight.deptime)">
     </label></td>
     <td><label>
       <input #arrdate type="date"  [valueAsDate]="flight.arrtime" (change)="setDate(arrdate.value, flight.arrtime)">
     </label></td>
     <td><label>
-      <input #arrtime type="time" [valueAsNumber]="flight.arrtime" (change)="setTime(arrtime.value, flight.arrtime)">
+      <input #arrtime type="time" [valueAsNumber]="flight.arrtime" (blur)="setTime(arrdate.value, arrtime.value, flight.arrtime)">
     </label></td>
-    <td><span *ngIf="flight.actualDeptime">
+    <td><span >
      <label>
       <input #actual_depdate type="date"  [valueAsDate]="flight.actualDeptime" (change)="setDate(actual_depdate.value, flight.actualDeptime)">
     </label>
     </span></td>
-    <td><span *ngIf="flight.actualDeptime">
+    <td><span >
      <label>
-      <input #actual_deptime type="time"  [valueAsNumber]="flight.actualDeptime" (change)="setTime(actual_deptime.value, flight.actualDeptime)">
+      <input #actual_deptime type="time"  [valueAsNumber]="flight.actualDeptime" (blur)="setTime(actual_depdate.value,actual_deptime.value, flight.actualDeptime)">
     </label>
     </span></td>
-    <td><span *ngIf="flight.actualArrtime">
+    <td><span >
      <label>
       <input #actual_arrdate type="date"  [valueAsDate]="flight.actualArrtime" (change)="setDate(actual_arrdate.value, flight.actualArrtime)">
     </label>
     </span></td>
-    <td><span *ngIf="flight.actualArrtime">
+    <td><span >
      <label>
-      <input #actual_arrtime type="time"  [valueAsNumber]="flight.actualArrtime" (change)="setTime(actual_arrtime.value, flight.actualArrtime)">
+      <input #actual_arrtime type="time"  [valueAsNumber]="flight.actualArrtime" (blur)="setTime(actual_arrdate.value,actual_arrtime.value, flight.actualArrtime)">
     </label>
     </span></td>
     <td><label>

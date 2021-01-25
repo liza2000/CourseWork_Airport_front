@@ -37,15 +37,16 @@ export class FlightControlComponent implements OnInit {
     // this.flight.deptime.setHours(this.flight.deptime.getHours()+3);
     // this.flight.arrtime.setHours(this.flight.arrtime.getHours()+3);
   }
-  setTime(time: string, date: Date) {
-    date.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
-    //this.err(this.flight.deptime);
+  setTime(dt: string,time: string, date: Date) {
+   let d = new Date(dt);
+      date.setFullYear(d.getFullYear());
+    date.setMonth(d.getMonth());
+   date.setDate(d.getDate());
+    date.setHours(Number(time.substr(0, 2))+3, Number(time.substr(3, 2)));
   }
   setDate(date: string, flightDate: Date) {
    let d = new Date(date);
-    flightDate.setFullYear(d.getFullYear());
-    flightDate.setMonth(d.getMonth());
-    flightDate.setDate(d.getDate());
+    flightDate.setFullYear(d.getFullYear(), d.getMonth(), d.getDate());
   }
   setArr(arr: string, flight: Flight) {
     flight.arr = arr;
@@ -70,7 +71,22 @@ export class FlightControlComponent implements OnInit {
     this.adminService.deleteFlight(id).subscribe(data => this.allflights = this.allflights.filter(f => f.id!=id));
   }
   change(flight: Flight) {
-    this.adminService.changeFlight(flight).subscribe(data => {
+    let flt = new Flight(flight.id.toString(),flight.dep,flight.arr,flight.deptime.toLocaleDateString(),
+      flight.arrtime.toLocaleDateString(),flight.count.toString(),flight.actualArrtime.toLocaleDateString(),
+      flight.actualDeptime.toLocaleDateString(),flight.aircraft,flight.status);
+    flt.deptime.setFullYear(flight.deptime.getFullYear(),flight.deptime.getMonth(),flight.deptime.getDate());
+    flt.deptime.setTime(flight.deptime.getTime());
+    flt.arrtime.setFullYear(flight.arrtime.getFullYear(),flight.arrtime.getMonth(),flight.arrtime.getDate());
+    flt.arrtime.setTime(flight.arrtime.getTime());
+    flt.actualDeptime.setFullYear(flight.actualDeptime.getFullYear(),flight.actualDeptime.getMonth(),flight.actualDeptime.getDate());
+    flt.actualDeptime.setTime(flight.actualDeptime.getTime());
+    flt.actualArrtime.setFullYear(flight.actualArrtime.getFullYear(),flight.actualArrtime.getMonth(),flight.actualArrtime.getDate());
+    flt.actualArrtime.setTime(flight.actualArrtime.getTime());
+    flt.actualArrtime.setHours(flt.actualArrtime.getHours()-3);
+    flt.actualDeptime.setHours(flt.actualDeptime.getHours()-3);
+    flt.deptime.setHours(flt.deptime.getHours()-3);
+    flt.arrtime.setHours(flt.arrtime.getHours()-3);
+    this.adminService.changeFlight(flt).subscribe(data => {
       this.err('Данные изменены')
     }, error => {
      this.err('Данные некорректны');

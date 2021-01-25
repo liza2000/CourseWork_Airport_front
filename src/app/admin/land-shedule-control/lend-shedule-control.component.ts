@@ -37,7 +37,14 @@ export class LendSheduleControlComponent implements OnInit {
     this.adminService.deleteWork(work.flight, this.employer.passport).subscribe(data => this.schedule = this.schedule.filter(w => w.flight!=work.flight));
   }
   public change(work: WorkAtTime) {
-    this.adminService.changeWork(work, this.employer.passport).subscribe(data => this.err('Смена изменена'), err => this.err('Не удалось изменить смену'));
+    let wrk = new WorkAtTime(work.flight.toString(),work.gate.toString(),'','');
+    wrk.start.setFullYear(work.start.getFullYear(),work.start.getMonth(),work.start.getDate());
+    wrk.start.setTime(work.start.getTime());
+    wrk.finish.setFullYear(work.finish.getFullYear(),work.finish.getMonth(),work.finish.getDate());
+    wrk.finish.setTime(work.finish.getTime());
+    wrk.start.setHours(wrk.start.getHours()-3);
+    wrk.finish.setHours(wrk.finish.getHours()-3);
+    this.adminService.changeWork(wrk, this.employer.passport).subscribe(data => this.err('Смена изменена'), err => this.err('Не удалось изменить смену'));
   }
   public setGate(gate: string, work: WorkAtTime) {
     work.gate = Number(gate);
@@ -48,8 +55,12 @@ export class LendSheduleControlComponent implements OnInit {
     work.start.setMonth(d.getMonth());
     work.start.setDate(d.getDate());
   }
-  public setStartTime(time: string, work: WorkAtTime) {
-    work.start.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
+  public setStartTime(dt: string, time: string, work: WorkAtTime) {
+    let d = new Date(dt);
+    work.start.setFullYear(d.getFullYear());
+    work.start.setMonth(d.getMonth());
+    work.start.setDate(d.getDate());
+    work.start.setHours(Number(time.substr(0, 2))+3, Number(time.substr(3, 2)));
   }
   public setFinishDate(date: string, work: WorkAtTime) {
     let d = new Date(date);
@@ -57,8 +68,12 @@ export class LendSheduleControlComponent implements OnInit {
     work.finish.setMonth(d.getMonth());
     work.finish.setDate(d.getDate());
   }
-  public setFinishTime(time: string, work: WorkAtTime) {
-    work.finish.setHours(Number(time.substr(0, 2)), Number(time.substr(3, 2)));
+  public setFinishTime(dt: string, time: string, work: WorkAtTime) {
+    let d = new Date(dt);
+    work.finish.setFullYear(d.getFullYear());
+    work.finish.setMonth(d.getMonth());
+    work.finish.setDate(d.getDate());
+    work.finish.setHours(Number(time.substr(0, 2))+3, Number(time.substr(3, 2)));
   }
   addNew(flight: string, startDate: string, startTime: string, finishDate: string, finishTime: string, gate: string) {
     const start = new Date(startDate + 'T' + startTime);
