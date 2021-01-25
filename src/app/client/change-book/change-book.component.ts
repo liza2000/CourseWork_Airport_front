@@ -26,16 +26,18 @@ book: Book = new Book();
       this.book.id = res['id'];
       this.book.amount = res['amount'];
       this.book.contact = res['contact'];
-      this.book.flight = res['flight'];
+      this.book.arrTime = res['arrTime'];
+      this.book.depTime = res['depTime'];
+      this.book.arrAirport = res['arrAirport'];
+      this.book.depAirport = res['depAirport'];
       for (let i in res['passengers'] ) {
         let passenger = new Passenger();
-        passenger.name = i['name'];
-        passenger.second_name = i['second_name'];
-        passenger.third_name = i['third_name'];
-        passenger.max_weight = i['max_weight'];
-        passenger.seat = i['seat'];
-        passenger.waitingRoom = i['waitingRoom'];
-        passenger.birthday = new Date(i['birthday']);
+        passenger.name = res['passengers'][i]['name'];
+        passenger.second_name = res['passengers'][i]['surname'];
+        passenger.third_name = res['passengers'][i]['pathronymic'];
+        passenger.max_weight = res['passengers'][i]['max_weight'];
+        passenger.seat = res['passengers'][i]['seat'];
+        passenger.waitingRoom = res['passengers'][i]['waitingRoom'];
         this.book.passengers.push(passenger);
       }
     }, error =>  this.err('Ошибка при загрузке брони'));
@@ -57,6 +59,9 @@ book: Book = new Book();
   change(p: Passenger) {
     this.bookService.changeTicket(p, this.bookID);
   }
+  // calculate(){
+  //   this.bookService.calculate(this.book.flight, this.book.passengers).subscribe(data =>  this.totalAmount = data as number);
+  // }
   delete(p: Passenger) {
     this.bookService.deleteTicket(p, this.bookID);
   }

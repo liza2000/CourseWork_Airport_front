@@ -1,6 +1,6 @@
 <button [routerLink]="['/main']">Вернуться</button><br/>
 <span *ngIf="errMessage">{{errMessage}}</span><br/>
-<span> Полёт: {{flight}}</span><br/>
+<div> Полёт: {{book.depAirport}}-{{book.arrAirport}}, {{book.depTime.toLocaleString()}} - {{book.arrTime.toLocaleString()}}</div><br/>
 
 <div class="container">
 
@@ -19,9 +19,6 @@
         </label><br/>
         <label>Отчество:
           {{p.third_name}}
-        </label><br/>
-        <label> Дата рождения:
-          {{p.birthday.toLocaleDateString()}}
         </label><br/>
         <span> Место:
           <select disabled #seat [value]="p.seat" (change)="setSeat(p,seat.value)">
@@ -50,7 +47,6 @@
         <textarea readonly [value]="book.contact"  (blur)="setContact(contact.value)" #contact></textarea><br/>
       </div><br/>
     </div>
-    <button>Расчитать стоимость</button>
   </form>
   <br/>
   Цена: {{book.amount}}

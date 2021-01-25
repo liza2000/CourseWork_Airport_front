@@ -4,10 +4,12 @@ import {Flight} from './flight';
 export class Book {
   public id: number;
   amount: number;
-  time: Date;
   passengers: Passenger[] = [];
   contact: string;
-  flight: string;
+  arrTime: Date;
+  depTime: Date;
+  depAirport: string;
+  arrAirport: string;
   constructor(){
   }
 }
