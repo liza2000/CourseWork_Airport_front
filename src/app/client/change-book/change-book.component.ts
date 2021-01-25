@@ -11,6 +11,7 @@ import {Book} from '../../model/book';
   styleUrls: ['./change-book.component.scss']
 })
 export class ChangeBookComponent implements OnInit {
+  errMessage: string;
   flight: Flight;
 passengers: Passenger[] = [];
 contactInfo: string;
@@ -20,8 +21,25 @@ book: Book = new Book();
 
   ngOnInit() {
     this.betweenCompService.currentBookID.subscribe(data => this.bookID = data);
-    this.bookService.getBook(this.bookID).subscribe(data => this.book = data as Book);
-    this.passengers = this.book.passengers;
+    this.bookService.getBook(this.bookID).subscribe((data: Response) => {
+      const res = JSON.parse(JSON.stringify(data));
+      this.book = new Book();
+      this.book.id = res['id'];
+      this.book.amount = res['amount'];
+      this.book.contact = res['contact'];
+      this.book.flight = res['flight'];
+      for (let i in res['passengers'] ) {
+        let passenger = new Passenger();
+        passenger.name = i['name'];
+        passenger.second_name = i['second_name'];
+        passenger.third_name = i['third_name'];
+        passenger.max_weight = i['max_weight'];
+        passenger.seat = i['seat'];
+        passenger.waitingRoom = i['waitingRoom'];
+        passenger.birthday = new Date(i['birthday']);
+        this.book.passengers.push(passenger);
+      }
+    });
   }
   setSeat(pass: Passenger, value: string) {
     pass.seat = value;
@@ -42,5 +60,9 @@ book: Book = new Book();
   }
   delete(p: Passenger) {
     this.bookService.deleteTicket(p, this.bookID);
+  }
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
   }
 }

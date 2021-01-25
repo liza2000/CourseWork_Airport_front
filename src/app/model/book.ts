@@ -5,7 +5,7 @@ export class Book {
   public id: number;
   amount: number;
   time: Date;
-  passengers: Passenger[];
+  passengers: Passenger[] = [];
   contact: string;
   flight: Flight;
   count = 3;
