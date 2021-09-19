@@ -50,16 +50,16 @@ public count;
     this.contactInfo = v;
   }
   setPassport(pass: Passenger, value: string) {
-    pass.passport_no = value;
+    pass.personalData.passport = value;
 }
   setName(pass: Passenger, value: string) {
-    pass.name = value;
+    pass.personalData.name = value;
   }
   setSecondName(pass: Passenger, value: string) {
-    pass.second_name = value;
+    pass.personalData.surname = value;
   }
   setThirdName(pass: Passenger, value: string) {
-    pass.third_name = value;
+    pass.personalData.passport = value;
   }
   setBornDate(pass: Passenger, value: string) {
     pass.birthday = new Date(value);

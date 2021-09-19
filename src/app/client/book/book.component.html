@@ -9,7 +9,7 @@
   </label>
   </div>
   <br/>
-  <form>
+  <form #f="ngForm">
     <div class="passengers">
     <div class="passenger" *ngFor="let p of passengers">
   <label> Паспорт:
@@ -53,7 +53,7 @@
     <textarea (change)="setContact(contact.value)" #contact></textarea><br/>
   </label><br/>
       <button (click)="calculateAmount()">Расчитать цену</button>
-      <button type="submit" (click)="sendBook()">Забронировать</button></div>
+      <button type="submit" [disabled]="!f.valid" (click)="sendBook()">Забронировать</button></div>
   </form><br/>
 Цена: {{totalAmount}}
 </div>

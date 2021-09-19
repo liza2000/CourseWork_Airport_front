@@ -23,7 +23,7 @@ export class LendSheduleControlComponent implements OnInit {
     // this.schedule.push(this.work);
     // this.schedule.push(this.work1);
     this.service.currentEmployer.subscribe(message => this.employer = message);
-    this.adminService.getSchedule(this.employer.passport).subscribe((data: Response) => {
+    this.adminService.getSchedule(this.employer.personalData.passport).subscribe((data: Response) => {
       const res = JSON.parse(JSON.stringify(data));
       for (let i in res ) {
         let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);
@@ -34,7 +34,7 @@ export class LendSheduleControlComponent implements OnInit {
     } );
   }
   public delete(work: WorkAtTime) {
-    this.adminService.deleteWork(work.flight, this.employer.passport).subscribe(data => this.schedule = this.schedule.filter(w => w.flight!=work.flight));
+    this.adminService.deleteWork(work.flight, this.employer.personalData.passport).subscribe(data => this.schedule = this.schedule.filter(w => w.flight!=work.flight));
   }
   public change(work: WorkAtTime) {
     let wrk = new WorkAtTime(work.flight.toString(),work.gate.toString(),'','');
@@ -44,7 +44,7 @@ export class LendSheduleControlComponent implements OnInit {
     wrk.finish.setTime(work.finish.getTime());
     wrk.start.setHours(wrk.start.getHours()-3);
     wrk.finish.setHours(wrk.finish.getHours()-3);
-    this.adminService.changeWork(wrk, this.employer.passport).subscribe(data => this.err('Смена изменена'), err => this.err('Не удалось изменить смену'));
+    this.adminService.changeWork(wrk, this.employer.personalData.passport).subscribe(data => this.err('Смена изменена'), err => this.err('Не удалось изменить смену'));
   }
   public setGate(gate: string, work: WorkAtTime) {
     work.gate = Number(gate);
@@ -78,7 +78,7 @@ export class LendSheduleControlComponent implements OnInit {
   addNew(flight: string, startDate: string, startTime: string, finishDate: string, finishTime: string, gate: string) {
     const start = new Date(startDate + 'T' + startTime);
     const finish = new Date(finishDate + 'T' + finishTime);
-    this.adminService.addNewSchedule(this.employer.passport, flight, start, finish, gate).subscribe( data => this.err('Смена добавлена'),
+    this.adminService.addNewSchedule(this.employer.personalData.passport, flight, start, finish, gate).subscribe( data => this.err('Смена добавлена'),
       error => {
       if (error.status == 404) this.err('Полёт не найден');
         if (error.status == 400) this.err('Смена на этот полёт уже существует');
@@ -92,7 +92,7 @@ export class LendSheduleControlComponent implements OnInit {
     this.addFormOpened = !this.addFormOpened;
     if (this.addFormOpened) return;
     this.schedule = [];
-    this.adminService.getSchedule(this.employer.passport).subscribe((data: Response) => {
+    this.adminService.getSchedule(this.employer.personalData.passport).subscribe((data: Response) => {
       const res = JSON.parse(JSON.stringify(data));
       for (let i in res ) {
         let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);

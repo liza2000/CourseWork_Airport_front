@@ -36,22 +36,22 @@
 <tr *ngFor="let emp of employeers">
   <td>{{emp.passport}}</td>
   <td><label>
-    <input type="text" #name [value]="emp.name" (change)="setName(name.value,emp)"/>
+    <input type="text" #name [value]="emp.name" (change)="setProperty('name',name.value,emp)"/>
   </label></td>
   <td><label>
-    <input type="text" #surname [value]="emp.surname" (change)="setSurname(surname.value,emp)"/>
+    <input type="text" #surname [value]="emp.surname" (change)="setProperty('surname',surname.value,emp)"/>
   </label></td>
   <td><label>
-    <input type="text" #pathronymic [value]="emp.pathronymic" (change)="setPathronymic(pathronymic.value,emp)"/>
+    <input type="text" #pathronymic [value]="emp.pathronymic" (change)="setProperty('pathronymic',pathronymic.value,emp)"/>
   </label></td>
   <td><label>
-    <select #position [value]="emp.position" (change)="setPosition(position.value,emp)">
+    <select #position [value]="emp.position" (change)="setProperty('position',position.value,emp)">
       <option>reception</option>
       <option>gate</option>
     </select>
   </label></td>
   <td><label>
-    <input type="text" #company [value]="emp.company" (change)="setCompany(company.value,emp)"/>
+    <input type="text" #company [value]="emp.company" (change)="setProperty('company',company.value,emp)"/>
   </label></td>
   <td style="width: 250px">
     <button (click)="delete(emp.passport)">Удалить</button>

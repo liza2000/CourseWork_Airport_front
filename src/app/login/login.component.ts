@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     let pos: string;
     this.schedService.getPosition(id).subscribe(data => {
       pos = data as string;
-      console.log(pos)
       if (!pos.localeCompare('reception') && !pos.localeCompare('gate')) {
         this.err('Такого сотрудника не существует');
         return;

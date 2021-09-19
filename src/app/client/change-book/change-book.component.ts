@@ -32,9 +32,9 @@ book: Book = new Book();
       this.book.depAirport = res['depAirport'];
       for (let i in res['passengers'] ) {
         let passenger = new Passenger();
-        passenger.name = res['passengers'][i]['name'];
-        passenger.second_name = res['passengers'][i]['surname'];
-        passenger.third_name = res['passengers'][i]['pathronymic'];
+        passenger.personalData.name = res['passengers'][i]['name'];
+        passenger.personalData.surname = res['passengers'][i]['surname'];
+        passenger.personalData.pathronymic = res['passengers'][i]['pathronymic'];
         passenger.max_weight = res['passengers'][i]['max_weight'];
         passenger.seat = res['passengers'][i]['seat'];
         passenger.waitingRoom = res['passengers'][i]['waitingRoom'];

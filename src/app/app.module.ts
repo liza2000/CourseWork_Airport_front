@@ -24,6 +24,7 @@ import {BookTicketsService} from './services/book-tickets.service';
 import {RegistrationService} from './services/registration.service';
 import {LandService} from './services/land.service';
 import {ScheduleService} from './services/schedule.service';
+import { PersonalDataComponent } from './model/personal-data/personal-data.component';
 const appRoutes: Routes = [
   {
   path: 'main',
@@ -67,6 +68,7 @@ const appRoutes: Routes = [
     CompaniesControlComponent,
     FlightControlComponent,
     ChangeBookComponent,
+    PersonalDataComponent,
   ],
   imports: [
     BrowserModule,

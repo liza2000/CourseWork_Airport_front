@@ -1,17 +1,13 @@
+import {PersonalData} from './personal-data';
+
 export class Employer {
-  passport: string;
-  name: string;
-  surname: string;
-  pathronymic: string;
+  personalData: PersonalData;
   company: string;
   position: string;
 
 
-  constructor(passport: string, name: string, surname: string, pathronymic: string, company: string, position: string) {
-    this.passport = passport;
-    this.name = name;
-    this.surname = surname;
-    this.pathronymic = pathronymic;
+  constructor(personalData: PersonalData, company: string, position: string) {
+    this.personalData = personalData;
     this.company = company;
     this.position = position;
   }

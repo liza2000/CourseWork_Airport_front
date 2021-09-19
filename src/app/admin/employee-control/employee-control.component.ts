@@ -3,6 +3,7 @@ import {Employer} from '../../model/employer';
 import {BetweenComponentsService} from '../../services/betweenComponents.service';
 import {AdminService} from '../../services/admin.service';
 import {Aircraft} from '../../model/aircraft';
+import {PersonalData} from '../../model/personal-data';
 
 @Component({
   selector: 'app-employee-control',
@@ -24,7 +25,7 @@ export class EmployeeControlComponent implements OnInit {
     this.adminService.getEmployers().subscribe((data: Response) => {
         const res = JSON.parse(JSON.stringify(data));
         for (let i in res ) {
-          let employee = new Employer( res[i]['passport'],res[i]['name'], res[i]['surname'], res[i]['pathronymic'], res[i]['company'], res[i]['position']);
+          let employee = new Employer( new PersonalData(res[i]['passport'],res[i]['name'], res[i]['surname'], res[i]['pathronymic']), res[i]['company'], res[i]['position']);
           this.employeers.push(employee);
         }
       },
@@ -34,20 +35,8 @@ export class EmployeeControlComponent implements OnInit {
     this.sheduleOpened = true;
     this.service.sendEmployer(emp);
   }
-  setName(name: string, emp: Employer) {
-    emp.name = name;
-  }
-  setSurname(surname: string, emp: Employer) {
-    emp.surname = surname;
-  }
-  setPathronymic(pathronymic: string, emp: Employer) {
-    emp.pathronymic = pathronymic;
-  }
-  setPosition(position: string, emp: Employer) {
-    emp.position = position;
-  }
-  setCompany(company: string, emp: Employer) {
-    emp.company = company;
+  setProperty(propname: string, value: string, emp: Employer) {
+    emp[propname] = value;
   }
   addNewEmpl(passport: string, name: string, surname: string, pathronymic: string, position: string, company) {
     this.adminService.addNewEmpl(passport, name, surname, pathronymic, position, company).subscribe(data => this.err('Сотрудник добавлен'),
@@ -57,7 +46,7 @@ export class EmployeeControlComponent implements OnInit {
       });
   }
   delete(passport: string) {
-    this.adminService.deleteEmpl(passport).subscribe(data => this.employeers = this.employeers.filter(e => !e.passport.localeCompare(passport)));
+    this.adminService.deleteEmpl(passport).subscribe(data => this.employeers = this.employeers.filter(e => !e.personalData.passport.localeCompare(passport)));
   }
   change(empl: Employer) {
     this.adminService.changeEmployee(empl).subscribe(data => this.err('Данные изменены'));
@@ -73,7 +62,7 @@ export class EmployeeControlComponent implements OnInit {
     this.adminService.getEmployers().subscribe((data: Response) => {
         const res = JSON.parse(JSON.stringify(data));
         for (let i in res ) {
-          let employee = new Employer( res[i]['passport'],res[i]['name'], res[i]['surname'], res[i]['pathronymic'], res[i]['company'], res[i]['position']);
+          let employee = new Employer( new PersonalData(res[i]['passport'],res[i]['name'], res[i]['surname'], res[i]['pathronymic']), res[i]['company'], res[i]['position']);
           this.employeers.push(employee);
         }
       },
