@@ -22,4 +22,9 @@ export class Flight {
     this.aircraft = aircraft;
     this.status = status;
   }
+
+  static init(res){
+    return new Flight(res['id'], res['dep'], res['arr'],
+      res['deptime'],res['arrtime'], res['count'],res['actualArrtime'],res['actualDeptime'],res['aircraft'],res['status']);
+  }
 }

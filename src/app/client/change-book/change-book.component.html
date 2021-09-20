@@ -9,13 +9,13 @@
     <div class="passengers">
       <div class="passenger" *ngFor="let p of book.passengers">
         <label> Фамилия:
-      {{p.second_name}}
+      {{p.personalData.lastName}}
         </label><br/>
         <label> Имя:
-        {{p.name}}
+        {{p.personalData.name}}
         </label><br/>
         <label>Отчество:
-          {{p.third_name}}
+          {{p.personalData.middleName}}
         </label><br/>
         <span> Место:
           {{p.seat}}

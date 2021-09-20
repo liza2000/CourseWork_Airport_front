@@ -33,8 +33,8 @@ book: Book = new Book();
       for (let i in res['passengers'] ) {
         let passenger = new Passenger();
         passenger.personalData.name = res['passengers'][i]['name'];
-        passenger.personalData.surname = res['passengers'][i]['surname'];
-        passenger.personalData.pathronymic = res['passengers'][i]['pathronymic'];
+        passenger.personalData.lastName = res['passengers'][i]['surname'];
+        passenger.personalData.middleName = res['passengers'][i]['pathronymic'];
         passenger.max_weight = res['passengers'][i]['max_weight'];
         passenger.seat = res['passengers'][i]['seat'];
         passenger.waitingRoom = res['passengers'][i]['waitingRoom'];
@@ -42,28 +42,8 @@ book: Book = new Book();
       }
     }, error =>  this.err('Ошибка при загрузке брони'));
   }
-  setSeat(pass: Passenger, value: string) {
-    pass.seat = value;
-  }
-
-  setRoom(pass: Passenger, value: string) {
-    pass.waitingRoom = value;
-  }
-  setBaggage(pass: Passenger, value: string) {
-    pass.max_weight = Number(value);
-  }
-  setContact(v) {
-    this.book.contact = v;
-    this.bookService.changeContactInfo(this.book.contact).subscribe();
-  }
   change(p: Passenger) {
     this.bookService.changeTicket(p, this.bookID);
-  }
-  // calculate(){
-  //   this.bookService.calculate(this.book.flight, this.book.passengers).subscribe(data =>  this.totalAmount = data as number);
-  // }
-  delete(p: Passenger) {
-    this.bookService.deleteTicket(p, this.bookID);
   }
   err(mes: string){
     this.errMessage = mes;

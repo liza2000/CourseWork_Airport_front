@@ -14,22 +14,11 @@ export class EmployeeControlComponent implements OnInit {
   errMessage: string;
   addFormOpened = false;
   sheduleOpened = false;
-    // employer: Employer = new Employer();
-    // employer1: Employer = new Employer();
     employeers: Employer[] = [];
   constructor( private service: BetweenComponentsService, private adminService: AdminService) { }
 
   ngOnInit() {
-    // this.employeers.push(this.employer);
-    // this.employeers.push(this.employer1);
-    this.adminService.getEmployers().subscribe((data: Response) => {
-        const res = JSON.parse(JSON.stringify(data));
-        for (let i in res ) {
-          let employee = new Employer( new PersonalData(res[i]['passport'],res[i]['name'], res[i]['surname'], res[i]['pathronymic']), res[i]['company'], res[i]['position']);
-          this.employeers.push(employee);
-        }
-      },
-        error => this.err('Ошибка при загрузке сотрудников'));
+    this.getEmployees();
   }
   openSchedule(emp: Employer) {
     this.sheduleOpened = true;
@@ -59,6 +48,9 @@ export class EmployeeControlComponent implements OnInit {
     this.addFormOpened = !this.addFormOpened;
     if (this.addFormOpened) return;
     this.employeers = [];
+
+  }
+  getEmployees(){
     this.adminService.getEmployers().subscribe((data: Response) => {
         const res = JSON.parse(JSON.stringify(data));
         for (let i in res ) {

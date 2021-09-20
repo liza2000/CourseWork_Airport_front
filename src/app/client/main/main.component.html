@@ -33,7 +33,7 @@
         <button (click)="searchFlights(dep.value,arr.value,date.value,count.value)">Найти билеты</button>
       </form>
     </div>
-  <div [hidden]="allflights.length==0" class="table-container" *ngIf="!bookMode">
+  <div [hidden]="allflights.length==0" class="table-container" *ngIf="!selectedFlight">
       <table>
         <tr>
           <th>Откуда</th>
@@ -47,11 +47,11 @@
           <td>{{flight.arr}}</td>
           <td >{{flight.deptime.toLocaleTimeString()}}</td>
           <td >{{flight.count}}</td>
-          <td><button (click)="bookMode=true; toBook(flight)">Забронировать</button></td>
+          <td><button (click)="selectedFlight = flight">Забронировать</button></td>
         </tr>
       </table>
   </div>
-  <app-book *ngIf=bookMode></app-book>
+  <app-book [flight]="selectedFlight" *ngIf=selectedFlight ></app-book>
   <br/>
-  <button *ngIf="bookMode" (click)="bookMode=false">Отменить</button>
+  <button *ngIf="selectedFlight" (click)="selectedFlight = null">Отменить</button>
 </div>

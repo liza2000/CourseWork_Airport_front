@@ -34,15 +34,15 @@
     <th></th>
   </tr>
 <tr *ngFor="let emp of employeers">
-  <td>{{emp.passport}}</td>
+  <td>{{emp.personalData.passport}}</td>
   <td><label>
-    <input type="text" #name [value]="emp.name" (change)="setProperty('name',name.value,emp)"/>
+    <input type="text" #name [value]="emp.personalData.name" (change)="setProperty('name',name.value,emp)"/>
   </label></td>
   <td><label>
-    <input type="text" #surname [value]="emp.surname" (change)="setProperty('surname',surname.value,emp)"/>
+    <input type="text" #surname [value]="emp.personalData.lastName" (change)="setProperty('surname',surname.value,emp)"/>
   </label></td>
   <td><label>
-    <input type="text" #pathronymic [value]="emp.pathronymic" (change)="setProperty('pathronymic',pathronymic.value,emp)"/>
+    <input type="text" #pathronymic [value]="emp.personalData.middleName" (change)="setProperty('pathronymic',pathronymic.value,emp)"/>
   </label></td>
   <td><label>
     <select #position [value]="emp.position" (change)="setProperty('position',position.value,emp)">
@@ -54,7 +54,7 @@
     <input type="text" #company [value]="emp.company" (change)="setProperty('company',company.value,emp)"/>
   </label></td>
   <td style="width: 250px">
-    <button (click)="delete(emp.passport)">Удалить</button>
+    <button (click)="delete(emp.personalData.passport)">Удалить</button>
     <button (click)="change(emp)">Изменить</button>
     <button *ngIf="emp.position!=2" (click)="openSchedule(emp)">Расписание</button>
   </td>

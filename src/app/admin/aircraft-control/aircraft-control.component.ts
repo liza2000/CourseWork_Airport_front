@@ -16,15 +16,7 @@ export class AircraftControlComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    // this.aircrafts.push(this.aircraft);
-    // this.aircrafts.push(this.aircraft1);
-    this.adminService.getAircrafts().subscribe((data: Response) => {
-      const res = JSON.parse(JSON.stringify(data));
-      for (let i in res ) {
-        let aircraft = new Aircraft(res[i]['company'], res[i]['id'], res[i]['location'], res[i]['aircraftmodel']);
-        this.aircrafts.push(aircraft);
-      }
-    }, error => this.err('Ошибка при загрузке самолётов'));
+    this.getAircrafts()
   }
 
   setModel(model: string, aircraft: Aircraft) {
@@ -53,6 +45,14 @@ export class AircraftControlComponent implements OnInit {
     this.addFormOpened = !this.addFormOpened;
     if(this.addFormOpened) return;
     this.aircrafts = [];
+    this.getAircrafts();
+  }
+  err(mes: string){
+    this.errMessage = mes;
+    setTimeout(() => {this.errMessage = null; }, 3000);
+  }
+
+  getAircrafts(){
     this.adminService.getAircrafts().subscribe((data: Response) => {
       const res = JSON.parse(JSON.stringify(data));
       for (let i in res ) {
@@ -61,9 +61,4 @@ export class AircraftControlComponent implements OnInit {
       }
     }, error => this.err('Ошибка при загрузке самолётов'));
   }
-  err(mes: string){
-    this.errMessage = mes;
-    setTimeout(() => {this.errMessage = null; }, 3000);
-  }
-
 }

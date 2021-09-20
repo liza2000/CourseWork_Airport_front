@@ -2,7 +2,7 @@
     Выйти
   </button><br/>
  <span>{{passport}}</span>
- <div class="container" *ngIf="!isReady">
+ <div class="container" *ngIf="!selectedFlight">
   <table>
     <tr>
       <th>Полет</th>
@@ -15,13 +15,13 @@
       <td>{{work.gate}}</td>
       <td>{{work.start.toLocaleDateString()}} {{work.start.toLocaleTimeString()}}</td>
       <td >{{work.finish.toLocaleDateString()}} {{work.finish.toLocaleTimeString()}}</td>
-      <td><button *ngIf="checkActualWork(work)" (click)="toRegistration(work.flight)">{{isReg?'Преступить к регистрации':'Начать посадку'}}</button></td>
+      <td><button (click)="selectedFlight = work.flight">{{isReg?'Преступить к регистрации':'Начать посадку'}}</button></td>
     </tr>
   </table>
   </div>
- <div class="container" *ngIf="isReady">
-   <app-registration *ngIf="isReg"></app-registration>
-   <app-landing *ngIf="!isReg"></app-landing>
+ <div class="container" *ngIf="selectedFlight">
+   <app-registration [flight]="selectedFlight" *ngIf="isReg"></app-registration>
+   <app-landing [flight]="selectedFlight" *ngIf="!isReg"></app-landing>
  </div>
 
 

@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {BetweenComponentsService} from '../../services/betweenComponents.service';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {Passenger} from '../../model/passenger';
 import {BookTicketsService} from '../../services/book-tickets.service';
+import {Flight} from '../../model/flight';
 
 @Component({
   selector: 'app-book',
@@ -10,7 +10,7 @@ import {BookTicketsService} from '../../services/book-tickets.service';
 })
 export class BookComponent implements OnInit, AfterViewInit {
   errMessage: string;
-public flight: number;
+public flightId: number;
 public passengers: Passenger[] = [] ;
 public contactInfo: string;
 public bookKey;
@@ -20,20 +20,20 @@ currentBus: number;
 currentEc: number;
 limit: number;
 totalAmount: number = 0;
+@Input('flight') flight: Flight;
 public count;
-  constructor(private betweenComponentsService: BetweenComponentsService, private bookTicketsService: BookTicketsService) { }
+  constructor(private bookTicketsService: BookTicketsService) { }
 
   ngOnInit() {
-    this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
-    this.betweenComponentsService.currentCount.subscribe(message => this.limit = message);
+    this.flightId = this.flight.id;
+    this.limit = this.flight.count;
     this.passengers.push(new Passenger());
     this.count = 1;
   }
 
   ngAfterViewInit(): void {
-    this.bookTicketsService.getCountOfBusinessSeats(this.flight).subscribe(data => {
+    this.bookTicketsService.getCountOfBusinessSeats(this.flightId).subscribe(data => {
         this.countOfBusiness = JSON.parse(JSON.stringify(data))['seats'] as number;
-        console.log(this.countOfBusiness);
       this.currentBus = this.countOfBusiness;
       this.countOfEconomy = this.limit - this.countOfBusiness;
       this.currentEc =  this.countOfEconomy;
@@ -42,7 +42,7 @@ public count;
   }
 
   sendBook() {
-   this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flight)
+   this.bookTicketsService.sendBook(this.contactInfo, this.passengers, this.flightId)
      .subscribe(data => {this.bookKey = data as number; alert('Бронь успешно добавлена. Номер брони: '+this.bookKey)},
          error => {this.err('Ошибка при бронировании')});
   }
@@ -56,7 +56,7 @@ public count;
     pass.personalData.name = value;
   }
   setSecondName(pass: Passenger, value: string) {
-    pass.personalData.surname = value;
+    pass.personalData.lastName = value;
   }
   setThirdName(pass: Passenger, value: string) {
     pass.personalData.passport = value;
@@ -91,7 +91,7 @@ public count;
     this.changeSeat();
   }
   calculateAmount() {
-    this.bookTicketsService.calculate(this.flight, this.passengers).subscribe(data =>  this.totalAmount = data as number);
+    this.bookTicketsService.calculate(this.flightId, this.passengers).subscribe(data =>  this.totalAmount = data as number);
   }
   changeSeat(){
     let ec = 0;

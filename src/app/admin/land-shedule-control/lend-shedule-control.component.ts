@@ -5,6 +5,8 @@ import {Employer} from '../../model/employer';
 import {AdminService} from '../../services/admin.service';
 import {Flight} from '../../model/flight';
 
+
+
 @Component({
   selector: 'app-lend-shedule-control',
   templateUrl: './lend-shedule-control.component.html',
@@ -14,24 +16,12 @@ export class LendSheduleControlComponent implements OnInit {
   errMessage: string;
   employer: Employer;
   addFormOpened = false;
-  // public work: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-01-11T11:00:00'), new Date('2021-01-11T23:00:00'));
-  // public work1: WorkAtTime = new WorkAtTime(1, 1, new Date('2021-12-08T21:00:00'), new Date('2020-12-08T22:00:00'));
   public schedule: WorkAtTime[] = [];
   constructor( private service: BetweenComponentsService, private adminService: AdminService) { }
 
   ngOnInit() {
-    // this.schedule.push(this.work);
-    // this.schedule.push(this.work1);
     this.service.currentEmployer.subscribe(message => this.employer = message);
-    this.adminService.getSchedule(this.employer.personalData.passport).subscribe((data: Response) => {
-      const res = JSON.parse(JSON.stringify(data));
-      for (let i in res ) {
-        let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);
-        work.start.setHours(work.start.getHours()+3);
-        work.finish.setHours(work.finish.getHours()+3);
-        this.schedule.push(work);
-      }
-    } );
+    getSchedule()
   }
   public delete(work: WorkAtTime) {
     this.adminService.deleteWork(work.flight, this.employer.personalData.passport).subscribe(data => this.schedule = this.schedule.filter(w => w.flight!=work.flight));
@@ -92,15 +82,17 @@ export class LendSheduleControlComponent implements OnInit {
     this.addFormOpened = !this.addFormOpened;
     if (this.addFormOpened) return;
     this.schedule = [];
-    this.adminService.getSchedule(this.employer.personalData.passport).subscribe((data: Response) => {
-      const res = JSON.parse(JSON.stringify(data));
-      for (let i in res ) {
-        let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);
-        work.start.setHours(work.start.getHours()+3);
-        work.finish.setHours(work.finish.getHours()+3);
-        this.schedule.push(work);
-      }
-    } );
+    getSchedule()
   }
 
+}function getSchedule() {
+  this.adminService.getSchedule(this.employer.personalData.passport).subscribe((data: Response) => {
+    const res = JSON.parse(JSON.stringify(data));
+    for (let i in res ) {
+      let work = new WorkAtTime(res[i]['flight'], res[i]['gate'], res[i]['start'], res[i]['finish']);
+      work.start.setHours(work.start.getHours()+3);
+      work.finish.setHours(work.finish.getHours()+3);
+      this.schedule.push(work);
+    }
+  } );
 }

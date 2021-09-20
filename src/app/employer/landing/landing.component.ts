@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Passenger} from '../../model/passenger';
-import {BetweenComponentsService} from '../../services/betweenComponents.service';
 import {LandService} from '../../services/land.service';
+import {Flight} from '../../model/flight';
 
 @Component({
   selector: 'app-landing',
@@ -11,11 +11,12 @@ import {LandService} from '../../services/land.service';
 export class LandingComponent implements OnInit {
   errMessage: string;
  public passenger: Passenger;
- public flight: number;
- constructor(public landService: LandService, public betweenComponentsService: BetweenComponentsService) { }
+ public flightId: number;
+  @Input('flight') flight: Flight;
+ constructor(public landService: LandService) { }
 
   ngOnInit() {
-    this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
+    this.flightId = this.flight.id
   }
 
   setBaggageStatus(val) {
@@ -25,7 +26,7 @@ export class LandingComponent implements OnInit {
   setPassport(v) {
     this.passenger = new Passenger();
     this.passenger.personalData.passport = v;
-    this.landService.getPassenger(v, this.flight).subscribe((data:Response) => {
+    this.landService.getPassenger(v, this.flightId).subscribe((data:Response) => {
       const res = JSON.parse(JSON.stringify(data));
       this.passenger.personalData.passport = res['passport_no'];
       this.passenger.max_weight = res['max_weight'];
@@ -35,7 +36,7 @@ export class LandingComponent implements OnInit {
 
   toLand() {
 
-  if (this.passenger.status!='null')  this.landService.toLand(this.passenger, this.flight.toString()).subscribe((data: Response) => {
+  if (this.passenger.status!='null')  this.landService.toLand(this.passenger, this.flightId.toString()).subscribe((data: Response) => {
     this.err('Пассажир прошел контроль')
   });
     this.passenger.personalData.passport = '';

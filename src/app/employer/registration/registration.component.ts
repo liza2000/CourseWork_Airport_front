@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Flight} from '../../model/flight';
 import {Passenger} from '../../model/passenger';
 import {BetweenComponentsService} from '../../services/betweenComponents.service';
@@ -11,20 +11,21 @@ import {RegistrationService} from '../../services/registration.service';
 })
 export class RegistrationComponent implements OnInit {
   errMessage: string;
-  public flight: number;
+  public flightId: number;
   public passenger: Passenger;
   public overWeight = 0;
   public startReg = false;
-  constructor(private regService: RegistrationService, private betweenComponentsService: BetweenComponentsService) { }
+  @Input('flight') flight: Flight;
+  constructor(private regService: RegistrationService) { }
 
   ngOnInit() {
-    this.betweenComponentsService.currentFlight.subscribe(message => this.flight = message);
+    this.flightId = this.flight.id
   }
   setPassport(v: string) {
     this.passenger = new Passenger();
     this.passenger.personalData.passport = v;
     this.startReg = true;
-    this.regService.getPassenger(v, this.flight).subscribe(
+    this.regService.getPassenger(v, this.flightId).subscribe(
       (data:Response) => {
       const res = JSON.parse(JSON.stringify(data));
       this.passenger.personalData.passport = res['personalData.passport'];
@@ -39,7 +40,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
   toRegistrate() {
-    this.regService.toRegistrate(this.passenger, this.flight.toString()).subscribe( (data: Response) => {
+    this.regService.toRegistrate(this.passenger, this.flightId.toString()).subscribe( (data: Response) => {
       this.err('Пассажир был успешно зарегестрирован')
     });
     this.passenger.personalData.passport = '';

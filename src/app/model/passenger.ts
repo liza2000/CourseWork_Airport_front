@@ -9,7 +9,7 @@ export class Passenger {
    max_weight = 0;
    total_weight: number;
    status = 'accept';
-   personalData: PersonalData = {pathronymic: '', passport: '', surname: '', name:''};
+   personalData: PersonalData = {middleName: '', passport: '', lastName: '', name:''};
 
   constructor(
   ) {}

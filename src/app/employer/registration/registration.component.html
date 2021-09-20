@@ -1,7 +1,7 @@
 <div class="regform container">
   <span *ngIf="errMessage">{{errMessage}}</span><br/>
   <label> Номер паспорта:
-    <input type="text" [ngModel]="passenger.passport_no" (change)="passport.checkValidity() && setPassport(passport.value)" #passport pattern="^[0-9]+$" maxlength="10" minlength="10" >
+    <input type="text" [ngModel]="passenger.personalData.passport" (change)="passport.checkValidity() && setPassport(passport.value)" #passport pattern="^[0-9]+$" maxlength="10" minlength="10" >
   </label>
   <br/>
   <div *ngIf="passenger&&passenger.status!='null'">Оплаченный вес багажа, кг:
